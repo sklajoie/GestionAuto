@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VehiculeConducteurs;
+use Carbon\Carbon;
 use App\Models\Visites;
-use Illuminate\Database\QueryException;
+use App\Models\Versements;
 use Illuminate\Http\Request;
+use App\Models\VehiculeConducteurs;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class VisitesController extends Controller
 {
@@ -45,6 +47,18 @@ class VisitesController extends Controller
 
            $id=$request->idvehecule;
 
+           $currentYear = Carbon::now()->year;
+           $currentMonth = Carbon::now()->month;
+            
+
+           $grandnumg=Visites::max('id');
+           $Newnumero = $grandnumg +1;
+                       if ((strlen((string)$Newnumero) == 1)) { $Newnumero = 'VS000'.$Newnumero ;}
+                       elseif ((strlen((string)$Newnumero) == 2)) { $Newnumero = 'VS00'.$Newnumero ;} 
+                       elseif ((strlen((string)$Newnumero) == 3)) { $Newnumero = 'VS0'.$Newnumero ;} 
+                       else{$Newnumero = 'VS'.$Newnumero ;}
+
+                       
            if($request->foto_cert !=null){
             $imageTempName = $request->file('foto_cert')->getPathname();
             $imageName = $request->file('foto_cert')->getClientOriginalName();
@@ -68,11 +82,34 @@ class VisitesController extends Controller
                     'conducteur_id'=> $request->conducteur,
                     'Attestation'=> $newImageName,
                     'Details'=> $request->details,
+                    'Montant'=> $request->montant,
                     'Status'=> "EN COURS",
                     'user_id'=> Auth::user()->id,
-                    // 'user_id'=> Auth::user()->id,
+                   'Reference'=> $Newnumero,
            ]);
-           
+
+           $lastReference = Versements::whereYear('created_at', $currentYear) 
+                                        ->whereMonth('created_at', $currentMonth) 
+                                        ->orderBy('id', 'desc')->first();
+
+                        $maxId = $lastReference ? $lastReference->id: 0;
+                        $maxId++; 
+                        $reference = sprintf('%d-%02d-%04d', $currentYear, $currentMonth, $maxId);
+
+                        Versements::create([
+                        'Montant'=> $request->montant,
+                        'MoyenPaiemet'=> 'ESPECE',
+                        'Reference'=> $Newnumero,
+                        'Rubrique'=> 'VISITE TECHNIQUE',
+                        'date'=> $request->date_vit,
+                        'Mouvement'=> 'SORTIE DE CAISSE',
+                        'Type'=> 'employe',
+                        'conducteur_id'=> $request->conducteur,
+                        'vehicule_id'=> $request->idvehecule,
+                        'codePaiement'=> $reference,
+                        'user_id'=> Auth::user()->id,
+                        ]);
+                                
         } catch(QueryException $ex){ 
             // dd($ex->getMessage());
             return back()->withErrors($request->all())->withInput()->with('danger', "Les données enregistrements ne sont pas correctes merci de verrifier !!! "); 
@@ -147,8 +184,16 @@ class VisitesController extends Controller
                     'conducteur_id'=> $request->conducteur,
                     'Attestation'=> $newImageName,
                     'Details'=> $request->details,
+                    'Montant'=> $request->montant,
                     'user_id'=> Auth::user()->id,
            ]);
+
+           
+           if($modifvisit->Reference)
+           {
+           $modivers = Versements::where('Reference', $modifvisit->Reference)->first();
+           $modivers->update(['Montant'=> $request->montant,'user_id'=> Auth::user()->id, ]);
+           }
            
         } catch(QueryException $ex){ 
             // dd($ex->getMessage());

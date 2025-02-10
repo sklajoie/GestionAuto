@@ -13,20 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reparations', function (Blueprint $table) {
+        Schema::create('entretiens', function (Blueprint $table) {
             $table->id();
-            $table->string('typePanne');
-            $table->text('DetailsPanne')->nullable();
-            $table->dateTime('DatePanne');
-            $table->float('CoutPanne')->nullable();
-            
-            $table->string('Reference')->nullable();
-            $table->string('typeReparation')->nullable();
-            $table->text('DetailsReparation')->nullable();
-            $table->dateTime('DateReparation')->nullable();
-            $table->float('CoutReparation')->nullable();
+            $table->string('Type')->nullable();
+            $table->string('Montant')->nullable();
+            $table->text('Description')->nullable();
+            $table->date('Date')->nullable();
+            $table->string('Garage')->nullable();
+            $table->string('Kmg')->nullable();
+            $table->boolean('Etat')->default(0);
             $table->string('Status')->nullable();
-            $table->boolean('Active')->default(0);
+            $table->string('Rappel')->nullable();
 
             $table->unsignedBigInteger('conducteur_id')->nullable();
             $table->foreign('conducteur_id')->references('id')->on('conducteurs')->onDelete('set null');
@@ -36,8 +33,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-
-            $table->boolean('supprimer')->default(0);
+            
             $table->timestamps();
         });
     }
@@ -49,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reparations');
+        Schema::dropIfExists('entretiens');
     }
 };

@@ -9,7 +9,7 @@ class Vehicules extends Model
 {
     protected $fillable = [
         'Matriculation','Marque','Model','Chassis','NombrePlace','DateAcquisition','Couleur','Active','Status','supprimer','user_id',
-        'Type',
+        'Type','Carburant','Categorie',
   
       ];
 

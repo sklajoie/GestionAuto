@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Visites extends Model
 {
     protected $fillable = [
-        'DateVisite','DateFin','Attestation','Status','Etat',
-        'conducteur_id','vehicule_id','user_id','supprimer','Details'
+        'DateVisite','DateFin','Attestation','Status','Etat','Reference',
+        'conducteur_id','vehicule_id','user_id','supprimer','Details','Montant',
       ];
 
       public function conducteur(){

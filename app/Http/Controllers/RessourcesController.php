@@ -48,8 +48,7 @@ class RessourcesController extends Controller
             Ressources::create([
                    'Rubrique'=> $request->rubrique,
                     'Autre'=> $request->type,
-                    'user_id'=> 1
-                    // 'user_id'=> Auth::user()->id,
+                    'user_id'=> Auth::user()->id,
            ]);
 
     return back()->with('success', "l'Enregistrement a été effectué avec success");
@@ -96,8 +95,7 @@ class RessourcesController extends Controller
             $modif->update([
                     'Rubrique'=> $request->rubrique,
                     'Autre'=> $request->type,
-                    'user_id'=> 1
-                    // 'user_id'=> Auth::user()->id,
+                     'user_id'=> Auth::user()->id,
            ]);
 
     return back()->with('success', "l'Enregistrement a été effectué avec success");

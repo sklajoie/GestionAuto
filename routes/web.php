@@ -3,6 +3,9 @@
 use App\Http\Controllers\AssurancesController;
 use App\Http\Controllers\ConducteursController;
 use App\Http\Controllers\DashbordsController;
+use App\Http\Controllers\EntretiensController;
+use App\Http\Controllers\EssencesController;
+use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\RapportsController;
 use App\Http\Controllers\ReparationsController;
 use App\Http\Controllers\RessourcesController;
@@ -46,6 +49,10 @@ Route::resource('/Assurances', AssurancesController::class);
 Route::resource('/Visites', VisitesController::class);
 Route::resource('/Vidanges', VidangesController::class);
 Route::resource('/Users', UserController::class);
+Route::resource('/Locations', LocationsController::class);
+Route::resource('/Entretiens', EntretiensController::class);
+Route::resource('/Essences', EssencesController::class);
+
 Route::get('/Liste-Vehicules', [VehiculesController::class, 'getvehicule'])->name('Liste-Vehicules');
  Route::get('/recherche-type-mvmt/{id}', [VersementsController::class, 'recherchetypemvmt'])->name('recherche-type-mvmt');
  Route::get('/Panne-Vehicule/{id}', [ReparationsController::class, 'pannevehicule'])->name('Panne-Vehicule');
@@ -59,6 +66,11 @@ Route::get('/Liste-Vehicules', [VehiculesController::class, 'getvehicule'])->nam
  Route::get('/Rapports-Moyens-Paiement', [RapportsController::class, 'rapportsmoyenspaiement'])->name('Rapports-Moyens-Paiement');
  Route::get('/Rapports-Rubriques', [RapportsController::class, 'getrapportsrubriques'])->name('Rapports-Rubriques');
  Route::get('/Rapports-Mouvements', [RapportsController::class, 'getrapportsmouvements'])->name('Rapports-Mouvements');
+ 
+//  Route::get('/Locations', [LocationsController::class, 'getrapportsmouvements'])->name('Locations');
+
+
+
 });
  Route::post('Login-Submit', [UserController::class, 'postuserlogin'])->name('Login-Submit');
  Route::get('/', [UserController::class, 'connexion'])->name('login');

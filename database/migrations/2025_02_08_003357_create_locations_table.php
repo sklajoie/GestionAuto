@@ -13,22 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('visites', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->date('DateVisite')->nullable();
-            $table->date('DateFin')->nullable();
-            $table->text('Attestation')->nullable();
-            $table->text('Details')->nullable();
-            $table->string('Status')->nullable();
-            $table->string('Reference')->nullable();
-            $table->boolean('Etat')->default(0);
+            $table->string('Client')->nullable();
+            $table->string('Contact')->nullable();
+            $table->string('Address')->nullable();
             $table->float('Montant')->nullable();
-            $table->boolean('supprimer')->default(0);
-
-            $table->unsignedBigInteger('conducteur_id')->nullable();
-            $table->foreign('conducteur_id')->references('id')->on('conducteurs')->onDelete('set null');
-
-            
+            $table->string('KmDebut')->nullable();
+            $table->string('KmFin')->nullable();
+            $table->date('DateDebut')->nullable();
+            $table->date('DateFin')->nullable();
+            $table->boolean('Etat')->default(0);
+            $table->string('Status')->nullable();
+            $table->text('Details')->nullable();
+            $table->text('Piece')->nullable();
             $table->unsignedBigInteger('vehicule_id')->nullable();
             $table->foreign('vehicule_id')->references('id')->on('vehicules')->onDelete('set null');
 
@@ -46,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visites');
+        Schema::dropIfExists('locations');
     }
 };

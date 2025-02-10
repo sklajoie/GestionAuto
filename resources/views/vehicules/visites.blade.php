@@ -65,6 +65,7 @@
                     <th>DATE VISITE</th>
                     <th>DATE FIN</th>
                     <th>CONDUCTEUR</th>
+                    <th>MONTANT</th>
                     <th>ATTESTATION</th>
                     <th>STATUS</th>
                     <th>ACTION</th>
@@ -78,8 +79,8 @@
                         <td> {{date('d-m-Y', strtotime($visite->DateVisite))}}</td>
                         <td> {{date('d-m-Y', strtotime($visite->DateFin))}}</td>
                         <td>{{$visite->conducteur->NomPrenom}}</td>
-                        {{-- <td>{{$visite->vehicule->Matriculation}} </td> --}}
-                        <td>{{$visite->Attestation}} </td>
+                        <td>{{$visite->Montant}} </td>
+                        <td><a href="/images/visites/{{$visite->Attestation}}" target="_blanck "> <i class="fa fa-file" ></i> </a> </td>
                         <td> {{$visite->Status}}</td>
                         <td>
                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modifiassurance{{$visite->id}}"> <i class="fas fa-edit"></i></button>
@@ -96,13 +97,13 @@
                                   </button>
                                 </div>
                             <div class="modal-body">
-                            <form  class="form-horizontal style-form" action="{{route('Visites.update',$visite->id )}}" method="POST">
+                            <form  class="form-horizontal style-form" enctype="multipart/form-data"  action="{{route('Visites.update',$visite->id )}}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="row col-md-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="matricule">Conducteur</label>
+                                            <label for="conducteur">Conducteur</label>
                                         <select class="form-control" name="conducteur" id="conducteur">
                                             <option value="">Choix du conducteur</option>
                                             @foreach ( $membres as $membre )
@@ -112,21 +113,25 @@
                                         </div>
     
                                         <div class="form-group">
-                                            <label for="matricule">Date de la visite</label>
+                                            <label for="date_vit">Date de la visite</label>
                                             <input type="date" class="form-control" value="{{$visite->DateVisite}}"  placeholder="" name="date_vit" required>
                                           </div>
                                         <div class="form-group">
-                                            <label for="matricule">Date fin visite</label>
+                                            <label for="date_fin_vit">Date fin visite</label>
                                             <input type="date" class="form-control" value="{{$visite->DateFin}}"  placeholder="" name="date_fin_vit" required>
                                           </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="matricule">Photo du certificat de visite</label>
+                                        <label for="montant">Montant Visite</label>
+                                        <input type="number" class="form-control"  value="{{$visite->Montant}}" placeholder="" name="montant">
+                                      </div>
+                                    <div class="form-group">
+                                        <label for="foto_cert">Photo du certificat de visite</label>
                                         <input type="file" class="form-control"  placeholder="" name="foto_cert">
                                       </div>
                                     <div class="form-group">
-                                        <label for="matricule">Plus de détails</label>
+                                        <label for="details">Plus de détails</label>
                                     <textarea name="details" id="" class="form-control" cols="100" rows="2">{{$visite->Details}}</textarea>
                                 </div>
                                    {{-- <div class="form-group">
@@ -173,7 +178,7 @@
               </button>
             </div>
         <div class="modal-body">
-        	<form role="form" method="POST" action="{{route('Visites.store')}}" enctype="multipart/form-data">
+        	<form role="form" method="POST" enctype="multipart/form-data"  action="{{route('Visites.store')}}" enctype="multipart/form-data">
 	
                 {!! csrf_field() !!}
                     <section class="content">
@@ -191,7 +196,7 @@
                              <div class="row col-md-12">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="matricule">Conducteur</label>
+                                        <label for="">Conducteur</label>
                                     <select class="form-control" name="conducteur" id="conducteur">
                                         <option value="">Choix du conducteur</option>
                                         @foreach ( $membres as $membre )
@@ -205,21 +210,25 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="matricule">Date de la visite</label>
+                                        <label for="">Date de la visite</label>
                                         <input type="date" class="form-control"  placeholder="" name="date_vit" required>
                                       </div>
                                     <div class="form-group">
-                                        <label for="matricule">Date fin visite</label>
+                                        <label for="">Date fin visite</label>
                                         <input type="date" class="form-control"  placeholder="" name="date_fin_vit" required>
                                       </div>
                             </div>
                             <div class="col-md-6">
                                <div class="form-group">
-                                <label for="matricule">Photo du certificat de visite</label>
+                                <label for="">Photo du certificat de visite</label>
                                 <input type="file" class="form-control"  placeholder="" name="foto_cert">
                               </div>
+                               <div class="form-group">
+                                <label for="">Montant visite</label>
+                                <input type="number" class="form-control"  placeholder="" name="montant">
+                              </div>
                             <div class="form-group">
-                                <label for="matricule">Plus de détails</label>
+                                <label for="">Plus de détails</label>
                             <textarea name="details" id="" class="form-control" cols="100" rows="2"></textarea>
                         </div>
                         </div>

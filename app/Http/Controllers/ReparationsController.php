@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Vehicules;
+use App\Models\Versements;
 use App\Models\Conducteurs;
 use App\Models\Reparations;
-use App\Models\VehiculeConducteurs;
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
+use App\Models\VehiculeConducteurs;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class ReparationsController extends Controller
 {
@@ -53,6 +55,17 @@ class ReparationsController extends Controller
             'vehicule' => 'required',
            ]);
 
+          
+            
+
+           $grandnumg=Reparations::max('id');
+           $Newnumero = $grandnumg +1;
+                       if ((strlen((string)$Newnumero) == 1)) { $Newnumero = 'RE000'.$Newnumero ;}
+                       elseif ((strlen((string)$Newnumero) == 2)) { $Newnumero = 'RE00'.$Newnumero ;} 
+                       elseif ((strlen((string)$Newnumero) == 3)) { $Newnumero = 'RE0'.$Newnumero ;} 
+                       else{$Newnumero = 'RE'.$Newnumero ;}
+
+
            try { 
            Reparations::create([
                     'typePanne'=> $request->typePanne,
@@ -64,7 +77,7 @@ class ReparationsController extends Controller
                     'Active'=> 0,
                     'Status'=> $request->status,
                     'user_id'=> Auth::user()->id,
-                    // 'user_id'=> Auth::user()->id,
+                    'Reference'=> $Newnumero,
            ]);
            
         } catch(QueryException $ex){ 
@@ -117,6 +130,9 @@ class ReparationsController extends Controller
 
            $reparer = Reparations::findOrFail($id);
 
+           $currentYear = Carbon::now()->year;
+           $currentMonth = Carbon::now()->month;
+           
            if($request->panne == 'PANNE')
            {
 
@@ -132,6 +148,36 @@ class ReparationsController extends Controller
                         // 'user_id'=> Auth::user()->id,
                ]);
            }elseif($request->panne == 'REPARE'){
+
+            $lastReference = Versements::whereYear('created_at', $currentYear) 
+                                        ->whereMonth('created_at', $currentMonth) 
+                                        ->orderBy('id', 'desc')->first();
+
+            $maxId = $lastReference ? $lastReference->id: 0;
+            $maxId++; 
+            $reference = sprintf('%d-%02d-%04d', $currentYear, $currentMonth, $maxId);
+           
+
+            if($reparer->CoutReparation)
+            {
+            $modivers = Versements::where('Reference', $reparer->Reference)->first();
+            $modivers->update(['Montant'=> $request->coutRepar,'user_id'=> Auth::user()->id, ]);
+            }else{
+
+            Versements::create([
+                'Montant'=> $request->coutRepar,
+                'MoyenPaiemet'=> 'ESPECE',
+                'Reference'=> $reparer->Reference,
+                'Rubrique'=> 'REPARATION VEHICULE',
+                'date'=> $request->dateRepar,
+                'Mouvement'=> 'SORTIE DE CAISSE',
+                'Type'=> 'employe',
+                'conducteur_id'=> $reparer->conducteur_id,
+                'vehicule_id'=> $reparer->vehicule_id,
+                'codePaiement'=> $reference,
+                'user_id'=> Auth::user()->id,
+                ]);
+            }
             $reparer->update([
                 'typeReparation'=> $request->typeRepar,
                 'CoutReparation'=> $request->coutRepar,
@@ -140,6 +186,8 @@ class ReparationsController extends Controller
                 'Status'=> $request->status,
                 'user_id'=> Auth::user()->id,
             ]);
+
+                
            }
 
            return redirect()->back()->with('success', "la modification a été effectué avec success");

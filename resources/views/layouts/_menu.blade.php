@@ -121,6 +121,60 @@
              
             </ul>
           </li>
+          <li class="nav-item {{ request()->routeIs('Locations*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('Locations*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                GESTION LOCATIONS
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="{{route('Locations.index')}}" class="nav-link {{ request()->routeIs('Locations*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>LOCATION</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item {{ request()->routeIs('Essences*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('Essences*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                GESTION ESSENCE
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="{{route('Essences.index')}}" class="nav-link {{ request()->routeIs('Essences*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>ESSENCE</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item {{ request()->routeIs('Entretiens*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('Entretiens*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                GESTION ENTRETIEN
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="{{route('Entretiens.index')}}" class="nav-link {{ request()->routeIs('Entretiens*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>ENTRETIEN</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
           <li class="nav-item {{ request()->routeIs('Users*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->routeIs('Users*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>

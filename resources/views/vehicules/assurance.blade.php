@@ -64,6 +64,7 @@
                     <th>N*</th>
                     <th>ASSURANCE</th>
                     <th>COMPAGNIE</th>
+                    <th>MONTANT</th>
                     <th>DATE DEBUT</th>
                     <th>DATE FIN</th>
                     <th>STATUS</th>
@@ -77,6 +78,7 @@
                         <td>{{++$key}}</td>
                         <td>{{$assurance->NomAssurance}}</td>
                         <td>{{$assurance->CompagnieAssurance}} </td>
+                        <td>{{$assurance->Montant}} </td>
                         <td> {{date('d-m-Y', strtotime($assurance->DateDebut))}}</td>
                         <td> {{date('d-m-Y', strtotime($assurance->DateFin))}}</td>
                         <td> {{$assurance->Status}}</td>
@@ -95,13 +97,13 @@
                                   </button>
                                 </div>
                             <div class="modal-body">
-                            <form  class="form-horizontal style-form" action="{{route('Assurances.update',$assurance->id )}}" method="POST">
+                            <form  class="form-horizontal style-form" enctype="multipart/form-data" action="{{route('Assurances.update',$assurance->id )}}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="row col-md-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="matricule">Conducteur</label>
+                                            <label for="">Conducteur</label>
                                         <select class="form-control" name="conducteur" id="conducteur">
                                             <option value="">Choix du conducteur</option>
                                             @foreach ( $membres as $membre )
@@ -111,31 +113,35 @@
                                         </div>
     
                                    <div class="form-group">
-                                     <label for="matricule">Numero Assurance</label>
+                                     <label for="">Numero Assurance</label>
                                      <input type="text" class="form-control" value="{{$assurance->NomAssurance}}" placeholder="" name="num_assur" >
                                    </div>
                                           <div class="form-group">
-                                     <label for="matricule">Compagnie Assurance</label>
+                                     <label for="">Compagnie Assurance</label>
                                      <input type="text" class="form-control" value="{{$assurance->CompagnieAssurance}}"  placeholder="" name="comp_assur" >
+                                   </div>
+                                    <div class="form-group">
+                                     <label for="">Montant</label>
+                                     <input type="number" class="form-control" value="{{$assurance->Montant}}"  placeholder="" name="montant" >
                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                       <label for="matricule">Date debut Assurance</label>
+                                       <label for="">Date debut Assurance</label>
                                        <input type="date" class="form-control" value="{{$assurance->DateDebut}}"  placeholder="" name="date_debut" required>
                                      </div>
                                    <div class="form-group">
-                                     <label for="matricule">Date fin Assurance</label>
+                                     <label for="">Date fin Assurance</label>
                                      <input type="date" class="form-control"  placeholder="" value="{{$assurance->DateFin}}" name="date_fin" required >
                                    </div>
                                    <div class="form-group">
-                                       <label for="matricule">Plus de détails</label>
+                                     <label for="matricule">Attestation</label>
+                                     <input type="file" class="form-control"  placeholder="" name="photo_assur" >
+                                   </div>
+                                   <div class="form-group">
+                                       <label for="">Plus de détails</label>
                                    <textarea name="details" id="" class="form-control" cols="50" rows="2">{{$assurance->Details}}</textarea>
                                </div>
-                                   {{-- <div class="form-group">
-                                     <label for="matricule">Photo de la police d'assurance</label>
-                                     <input type="file" class="form-control"  placeholder="" name="photo_assur" >
-                                   </div> --}}
                                 </div>
                             </div>
                             {{-- <input type="hidden" class="form-control"  placeholder="" name="idvehecule" > --}}
@@ -176,7 +182,7 @@
               </button>
             </div>
         <div class="modal-body">
-        	<form role="form" method="POST" action="{{route('Assurances.store')}}" enctype="multipart/form-data">
+        	<form role="form" method="POST" enctype="multipart/form-data" action="{{route('Assurances.store')}}" enctype="multipart/form-data">
 	
                 {!! csrf_field() !!}
                     <section class="content">
@@ -194,7 +200,7 @@
                              <div class="row col-md-12">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="matricule">Conducteur</label>
+                                        <label for="">Conducteur</label>
                                     <select class="form-control" name="conducteur" id="conducteur">
                                         <option value="">Choix du conducteur</option>
                                         @foreach ( $membres as $membre )
@@ -208,32 +214,36 @@
                                     </div>
 
                                <div class="form-group">
-                                 <label for="matricule">Numero Assurance</label>
+                                 <label for="">Numero Assurance</label>
                                  <input type="text" class="form-control"  placeholder="" name="num_assur" >
                                </div>
                                       <div class="form-group">
-                                 <label for="matricule">Compagnie Assurance</label>
+                                 <label for="">Compagnie Assurance</label>
                                  <input type="text" class="form-control"  placeholder="" name="comp_assur" >
+                               </div>
+                                      <div class="form-group">
+                                 <label for="">Montant</label>
+                                 <input type="number" class="form-control"  placeholder="" name="montant" >
                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                   <label for="matricule">Date debut Assurance</label>
+                                   <label for="">Date debut Assurance</label>
                                    <input type="date" class="form-control"  placeholder="" name="date_debut" required>
                                  </div>
                                <div class="form-group">
-                                 <label for="matricule">Date fin Assurance</label>
+                                 <label for="">Date fin Assurance</label>
                                  <input type="date" class="form-control"  placeholder="" name="date_fin" required >
                                </div>
                                <div class="form-group">
-                                   <label for="matricule">Photo de la police d'assurance</label>
+                                   <label for="">Attestation</label>
                                    <input type="file" class="form-control"  placeholder="" name="photo_assur" >
                                 </div>
+                                <div class="form-group">
+                                    <label for="">Plus de détails</label>
+                                <textarea name="details" id="" class="form-control" ></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="matricule">Plus de détails</label>
-                            <textarea name="details" id="" class="form-control" cols="100" rows="2"></textarea>
-                        </div>
+                            </div>
                         </div>
                         <input type="hidden" class="form-control"  placeholder="" value="{{$idvehicule}}" name="idvehecule" >
                      

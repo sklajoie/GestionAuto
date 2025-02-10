@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('KiloProchainVidange')->nullable();
             $table->text('Details')->nullable();
             $table->string('Status')->nullable();
+            $table->string('Reference')->nullable();
             $table->boolean('Etat')->default(0);
+            $table->float('Montant')->nullable();
             
             $table->unsignedBigInteger('conducteur_id')->nullable();
             $table->foreign('conducteur_id')->references('id')->on('conducteurs')->onDelete('set null');

@@ -9,7 +9,7 @@ class Vidanges extends Model
 {
     protected $fillable = [
         'DateVidange','DateFin','KiloVidange','MarqueHuile','KiloHuile','KiloProchainVidange','Status','Etat',
-        'conducteur_id','vehicule_id','user_id','supprimer','Details',
+        'conducteur_id','vehicule_id','user_id','supprimer','Details','Reference','Montant',
       ];
 
       public function conducteur(){

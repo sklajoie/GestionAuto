@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reparations extends Model
+class Entretiens extends Model
 {
     protected $fillable = [
-        'typePanne','DetailsPanne','DatePanne','CoutPanne','typeReparation','DetailsReparation','DateReparation','CoutReparation',
-        'Status','Active','conducteur_id','vehicule_id','user_id','Reference',
+        'Type','Montant','Description','Date','Garage','Kmg','Etat','Rappel',
+        'Status','conducteur_id','vehicule_id','user_id','Reference',
 
   
       ];
   
-      public function vehicules(){
+      public function vehicule(){
           return $this->belongsTo(Vehicules::class);
       }
       public function conducteur(){

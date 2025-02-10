@@ -86,7 +86,7 @@ class VersementsController extends Controller
                     }else{$newImageName = null;}
 
                     if($request->paiement == null){
-                        $modepaiement="CASH";
+                        $modepaiement="ESPECE";
                         }else{$modepaiement=$request->paiement;}
 
             Versements::create([

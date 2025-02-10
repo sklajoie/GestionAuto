@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Assurances;
-use App\Models\VehiculeConducteurs;
-use Illuminate\Database\QueryException;
+use App\Models\Versements;
 use Illuminate\Http\Request;
+use App\Models\VehiculeConducteurs;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class AssurancesController extends Controller
 {
@@ -43,6 +45,20 @@ class AssurancesController extends Controller
             'date_fin' => 'required',
            ]);
                     $id=$request->idvehecule;
+
+            $currentYear = Carbon::now()->year;
+            $currentMonth = Carbon::now()->month;
+                
+    
+            $grandnumg=Assurances::max('id');
+            $Newnumero = $grandnumg +1;
+                        if ((strlen((string)$Newnumero) == 1)) { $Newnumero = 'VS000'.$Newnumero ;}
+                        elseif ((strlen((string)$Newnumero) == 2)) { $Newnumero = 'VS00'.$Newnumero ;} 
+                        elseif ((strlen((string)$Newnumero) == 3)) { $Newnumero = 'VS0'.$Newnumero ;} 
+                        else{$Newnumero = 'VS'.$Newnumero ;}
+    
+                
+                                
            if($request->photo_assur !=null){
             $imageTempName = $request->file('photo_assur')->getPathname();
             $imageName = $request->file('photo_assur')->getClientOriginalName();
@@ -67,9 +83,36 @@ class AssurancesController extends Controller
                     'Attestation'=> $newImageName,
                     'Details'=> $request->details,
                     'Status'=> "EN COURS",
+                    'Montant'=> $request->montant,
+                    'Reference'=> $Newnumero,
                     'user_id'=> Auth::user()->id,
-                    // 'user_id'=> Auth::user()->id,
-           ]);
+                                             ]);
+
+
+                        $lastReference = Versements::whereYear('created_at', $currentYear) 
+                                        ->whereMonth('created_at', $currentMonth) 
+                                        ->orderBy('id', 'desc')->first();
+
+                        $maxId = $lastReference ? $lastReference->id: 0;
+                        $maxId++; 
+                        $reference = sprintf('%d-%02d-%04d', $currentYear, $currentMonth, $maxId);
+
+                        Versements::create([
+                        'Montant'=> $request->montant,
+                        'MoyenPaiemet'=> 'ESPECE',
+                        'Reference'=> $Newnumero,
+                        'Rubrique'=> 'RENOUVELLEMENT ASSURANCE',
+                        'date'=> $request->date_debut,
+                        'Mouvement'=> 'SORTIE DE CAISSE',
+                        'Type'=> 'employe',
+                        'conducteur_id'=> $request->conducteur,
+                        'vehicule_id'=> $request->idvehecule,
+                        'codePaiement'=> $reference,
+                        'user_id'=> Auth::user()->id,
+                        ]);
+
+                       
+          
            
         } catch(QueryException $ex){ 
             // dd($ex->getMessage());
@@ -125,9 +168,21 @@ class AssurancesController extends Controller
            ]);
 
           
+           $modifassur=Assurances::findOrFail($id);
+
+           if($request->photo_assur !=null){
+            $imageTempName = $request->file('photo_assur')->getPathname();
+            $imageName = $request->file('photo_assur')->getClientOriginalName();
+            $newImageName = time() . '_' . $imageName;
+            $path = base_path() . '/public/images/assurances/';
+            $request->file('photo_assur')->move($path , $newImageName); 
+    
+            }else{
+                $newImageName =$modifassur->Attestation;
+            }
 
            try { 
-            $modifassur=Assurances::findOrFail($id);
+           
             $modifassur->update([
                     'NomAssurance'=> $request->num_assur,
                     'CompagnieAssurance'=> $request->comp_assur,
@@ -135,8 +190,16 @@ class AssurancesController extends Controller
                     'DateFin'=> $request->date_fin,
                     'conducteur_id'=> $request->conducteur,
                     'Details'=> $request->details,
+                    'Montant'=> $request->montant,
+                    'Attestation'=> $newImageName,
                     'user_id'=> Auth::user()->id,
            ]);
+
+           if($modifassur->Reference)
+           {
+           $modivers = Versements::where('Reference', $modifassur->Reference)->first();
+           $modivers->update(['Montant'=> $request->montant,'user_id'=> Auth::user()->id, ]);
+           }
            
         } catch(QueryException $ex){ 
             // dd($ex->getMessage());

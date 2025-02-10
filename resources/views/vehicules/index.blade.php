@@ -166,16 +166,40 @@ if($vehicules){
                                         <label class="control-label" >MATRICULE</label>
                                         <input type="text" required value="{{$vehicule->Matriculation}}" class="form-control" name="matricule">
                                     
+                                        <label class="control-label">CATEGORIE</label>
+                                        <select name="categorie" class="form-control"  required id="">
+                                          <option value="{{$vehicule->Categorie}}">{{$vehicule->Categorie}}</option>
+                                          <option value="4X4">4XA</option>
+                                          <option value="BERLINE">Berline</option>
+                                          <option value="CTADINE">Cidadine</option>
+                                          <option value="VANNE">Vanne</option>
+                                          <option value="BUS">Bus</option>
+                                          <option value="MINI BUS">Mini Bus</option>
+                                          <option value="COMPACTE">Compacte</option>
+                                          <option value="COUPE">Coupe</option>
+                                        </select>
+                                        <label class="control-label">CARBURANT</label>
+                                        <select name="carburant" class="form-control"  required id="">
+                                          <option value="{{$vehicule->Carburant}}">{{$vehicule->Carburant}}</option>
+                                          <option value="ESSANCE SUPER">Essance Super</option>
+                                          <option value="ESSANCE NORMALE">Essance Normale</option>
+                                          <option value="ESSANCE SANS PLONB">Essance Sans Plonb</option>
+                                          <option value="GAZ-OIL">Gaz-Oil</option>
+                                          <option value="BUS">Bus</option>
+                                          <option value="GPL">GPL</option>
+                                          <option value="ELECTRIQUE">Electrique</option>
+                                          <option value="HYBRIDE">Hybride</option>
+                                        </select>
                                     
                                     <label class="control-label">MARQUE</label>
                                       <input type="text" required value="{{$vehicule->Marque}}" class="form-control" name="marque">
                                     
                                     <label class="control-label">MODEL</label>
                                       <input type="text" required value="{{$vehicule->Model}}" class="form-control" name="model">
-                                    <label class="control-label">NUMERO CHASSIS</label>
-                                      <input type="text" value="{{$vehicule->Chassis}}" class="form-control" name="numChassi">
                                     </div>
                                     <div class="col-sm-6">
+                                      <label class="control-label">NUMERO CHASSIS</label>
+                                        <input type="text" value="{{$vehicule->Chassis}}" class="form-control" name="numChassi">
                                     <label class="control-label">COULEUR</label>
                                       <input type="text" value="{{$vehicule->Couleur}}" class="form-control" name="couleur">
                                   
@@ -198,7 +222,7 @@ if($vehicules){
                     
                     
                                    <div class="#" style="text-align: center">
-                                 <button type="submit" class=" btn btn-primary">ENREGISTRER</button>
+                                 <button type="submit" class=" btn btn-warning">MODIFIER</button>
                                   <div>
                           </form>
                           </div>
@@ -246,6 +270,30 @@ if($vehicules){
                     <option value="VOITURE">VOITURE</option>
                     <option value="MOTO">MOTO</option>
                   </select>
+                  <label class="control-label">CATEGORIE</label>
+                  <select name="categorie" class="form-control"  required id="">
+                    <option value="">Choix Categorie</option>
+                    <option value="4X4">4XA</option>
+                    <option value="BERLINE">Berline</option>
+                    <option value="CTADINE">Cidadine</option>
+                    <option value="VANNE">Vanne</option>
+                    <option value="BUS">Bus</option>
+                    <option value="MINI BUS">Mini Bus</option>
+                    <option value="COMPACTE">Compacte</option>
+                    <option value="COUPE">Coupe</option>
+                  </select>
+                  <label class="control-label">CARBURANT</label>
+                  <select name="carburant" class="form-control"  required id="">
+                    <option value="">Choix Carburant</option>
+                    <option value="ESSANCE SUPER">Essance Super</option>
+                    <option value="ESSANCE NORMALE">Essance Normale</option>
+                    <option value="ESSANCE SANS PLONB">Essance Sans Plonb</option>
+                    <option value="GAZ-OIL">Gaz-Oil</option>
+                    <option value="BUS">Bus</option>
+                    <option value="GPL">GPL</option>
+                    <option value="ELECTRIQUE">Electrique</option>
+                    <option value="HYBRIDE">Hybride</option>
+                  </select>
                     <label class="control-label" >MATRICULE</label>
                     <input type="text" required value="{{ Request::old('matricule') }}" class="form-control" name="matricule">
                 
@@ -253,13 +301,15 @@ if($vehicules){
                 <label class="control-label">MARQUE</label>
                   <input type="text" required value="{{ Request::old('marque') }}" class="form-control" name="marque">
                 
-                <label class="control-label">MODEL</label>
-                  <input type="text" required value="{{ Request::old('model') }}" class="form-control" name="model">
-                <label class="control-label">NUMERO CHASSIS</label>
-                  <input type="text" value="{{ Request::old('numChassi') }}" class="form-control" name="numChassi">
+                  <label class="control-label">MODEL</label>
+                    <input type="text" required value="{{ Request::old('model') }}" class="form-control" name="model">
+                  
                 </div>
                 <div class="col-sm-6">
-                <label class="control-label">COULEUR</label>
+                    <label class="control-label">NUMERO CHASSIS</label>
+                    <input type="text" value="{{ Request::old('numChassi') }}" class="form-control" name="numChassi">
+                 
+                  <label class="control-label">COULEUR</label>
                   <input type="text" value="{{ Request::old('couleur') }}" class="form-control" name="couleur">
               
                 <label class="control-label">NOMBRE DE PLACE</label>

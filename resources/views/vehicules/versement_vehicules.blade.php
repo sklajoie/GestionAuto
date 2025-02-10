@@ -85,7 +85,7 @@
                       {{$versement->Beneficier}} 
                       @endif
                       @if($versement->Type == "employe")
-                      {{$versement->conducteur->NomPrenom}} ({{$versement->conducteur->Contact}})
+                      {{$versement->conducteur ? $versement->conducteur->NomPrenom : "" }} ({{$versement->conducteur? $versement->conducteur->Contact : ""}})
                       @endif
 
                     </td>

@@ -21,7 +21,9 @@ return new class extends Migration
             $table->date('DateFin')->nullable();
             $table->text('Attestation')->nullable();
             $table->text('Details')->nullable();
+            $table->string('Reference')->nullable();
             $table->string('Status')->nullable();
+            $table->float('Montant')->nullable();
             $table->boolean('Etat')->default(0);
 
             $table->unsignedBigInteger('conducteur_id')->nullable();

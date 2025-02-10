@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('Couleur')->nullable();
             $table->string('Status')->nullable();
             $table->string('Type')->nullable();
+            $table->string('Categorie')->nullable();
+            $table->string('Carburant')->nullable();
             $table->boolean('Active')->default(0);
             $table->boolean('supprimer')->default(0);
             $table->unsignedBigInteger('user_id')->nullable();

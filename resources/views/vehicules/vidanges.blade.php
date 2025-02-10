@@ -57,7 +57,7 @@
                 </h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body table-responsive">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -87,8 +87,8 @@
                         <td>{{$vidange->conducteur->NomPrenom}}</td>
                         <td> {{$vidange->Status}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modifiassurance{{$vidange->id}}"> <i class="fas fa-edit"></i></button>
-                            <a href="{{route('Assurances.show',$vidange->id)}}" class="btn btn-info"> <i class="fas fa-list"></i> </a>
+                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".modifiassurance{{$vidange->id}}"> <i class="fas fa-edit"></i></button>
+                            <a href="{{route('Assurances.show',$vidange->id)}}" class="btn btn-info btn-xs"> <i class="fas fa-list"></i> </a>
                         </td>
                     </tr>
                     <div class="modal fade modifiassurance{{$vidange->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -107,7 +107,7 @@
                                 <div class="row col-md-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="matricule">Conducteur</label>
+                                            <label for="conducteur">Conducteur</label>
                                         <select class="form-control" name="conducteur" id="conducteur">
                                             <option value="">Choix du conducteur</option>
                                             @foreach ( $membres as $membre )
@@ -117,33 +117,37 @@
                                         </div>
     
                                         <div class="form-group">
-                                          <label for="matricule">Date de Vidange</label>
+                                          <label for="date_vidange">Date de Vidange</label>
                                           <input type="date" class="form-control" value="{{$vidange->DateVidange}}"  placeholder="" name="date_vidange" required >
                                         </div>
                                         <div class="form-group">
-                                          <label for="matricule">Date Fin</label>
+                                          <label for="date_fin">Date Fin</label>
                                           <input type="date" class="form-control" value="{{$vidange->DateFin}}"  placeholder="" name="date_fin" required >
                                         </div>
                                         <div class="form-group">
-                                          <label for="matricule">Kilométrage jour de vidange </label>
+                                          <label for="kilo_vidange">Kilométrage jour de vidange </label>
                                           <input type="text" class="form-control" value="{{$vidange->KiloVidange}}"  placeholder="" name="kilo_vidange" required>
                                         </div>
                                       </div>
                                       <div class="col-md-6">
                                   <div class="form-group">
-                                    <label for="matricule">Marque de l'huile</label>
+                                    <label for="marque_huile">Marque de l'huile</label>
                                     <input type="text" class="form-control" value="{{$vidange->MarqueHuile}}"  placeholder="" name="marque_huile" >
                                   </div>
                                   <div class="form-group">
-                                    <label for="matricule">Kilométrage de l'huile</label>
+                                    <label for="kilo_huile">Kilométrage de l'huile</label>
                                     <input type="text" class="form-control" value="{{$vidange->KiloHuile}}"  placeholder="" name="kilo_huile" required>
                                   </div>
                                   <div class="form-group">
-                                    <label for="matricule">Kilométrage de la prochaine Vidange</label>
+                                    <label for="kilo_prochain">Kilométrage de la prochaine Vidange</label>
                                     <input type="text" class="form-control" value="{{$vidange->KiloProchainVidange}}" placeholder="" name="kilo_prochain" required>
                                   </div>
+                                  <div class="form-group">
+                                    <label for="montant">Coût  Vidange</label>
+                                    <input type="text" class="form-control" value="{{$vidange->Montant}}" placeholder="" name="montant" required>
+                                  </div>
                                     <div class="form-group">
-                                        <label for="matricule">Plus de détails</label>
+                                        <label for="details">Plus de détails</label>
                                     <textarea name="details" id="" class="form-control" cols="100" rows="2">{{$vidange->Details}}</textarea>
                                 </div>
                                    {{-- <div class="form-group">
@@ -208,7 +212,7 @@
                              <div class="row col-md-12">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="matricule">Conducteur</label>
+                                        <label for="conducteur">Conducteur</label>
                                     <select class="form-control" name="conducteur" id="conducteur">
                                         <option value="">Choix du conducteur</option>
                                         @foreach ( $membres as $membre )
@@ -222,11 +226,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                      <label for="matricule">Date de Vidange</label>
+                                      <label for="date_vidange">Date de Vidange</label>
                                       <input type="date" class="form-control"  placeholder="" name="date_vidange" required >
                                     </div>
                                     <div class="form-group">
-                                      <label for="matricule">Date Fin</label>
+                                      <label for="date_fin">Date Fin</label>
                                       <input type="date" class="form-control"  placeholder="" name="date_fin" required >
                                     </div>
                                     <div class="form-group">
@@ -236,19 +240,23 @@
                                   </div>
                                   <div class="col-md-6">
                               <div class="form-group">
-                                <label for="matricule">Marque de l'huile</label>
+                                <label for="marque_huile">Marque de l'huile</label>
                                 <input type="text" class="form-control"  placeholder="" name="marque_huile" >
                               </div>
                             <div class="form-group">
-                              <label for="matricule">Kilométrage de l'huile</label>
+                              <label for="kilo_huile">Kilométrage de l'huile</label>
                               <input type="text" class="form-control"  placeholder="" name="kilo_huile" required>
                             </div>
                             <div class="form-group">
-                              <label for="matricule">Kilométrage de la prochaine Vidange</label>
+                              <label for="kilo_prochain">Kilométrage de la prochaine Vidange</label>
                               <input type="text" class="form-control"  placeholder="" name="kilo_prochain" required>
                             </div>
                             <div class="form-group">
-                                <label for="matricule">Plus de détails</label>
+                              <label for="montant">Coût  Vidange</label>
+                              <input type="number" class="form-control"  placeholder="" name="montant" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="details">Plus de détails</label>
                             <textarea name="details" id="" class="form-control" cols="100" rows="2"></textarea>
                         </div>
                         </div>

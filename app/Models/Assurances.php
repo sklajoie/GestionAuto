@@ -9,7 +9,7 @@ class Assurances extends Model
 {
     protected $fillable = [
         'NomAssurance','CompagnieAssurance','DateDebut','DateFin','Attestation','Status','Etat',
-        'conducteur_id','vehicule_id','user_id','supprimer','Details',
+        'conducteur_id','vehicule_id','user_id','supprimer','Details','Reference','Montant',
       ];
 
       public function conducteur(){
