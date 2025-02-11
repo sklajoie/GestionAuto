@@ -53,6 +53,8 @@ Route::resource('/Locations', LocationsController::class);
 Route::resource('/Entretiens', EntretiensController::class);
 Route::resource('/Essences', EssencesController::class);
 
+Route::post('/Annee-Graphe', [DashbordsController::class, 'anneegraphe'])->name('Annee-Graphe');
+Route::post('/Vehicule-Graphe', [DashbordsController::class, 'vehiculegraphe'])->name('Vehicule-Graphe');
 Route::get('/Liste-Vehicules', [VehiculesController::class, 'getvehicule'])->name('Liste-Vehicules');
  Route::get('/recherche-type-mvmt/{id}', [VersementsController::class, 'recherchetypemvmt'])->name('recherche-type-mvmt');
  Route::get('/Panne-Vehicule/{id}', [ReparationsController::class, 'pannevehicule'])->name('Panne-Vehicule');

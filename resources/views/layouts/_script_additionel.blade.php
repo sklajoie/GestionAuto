@@ -503,4 +503,100 @@ function mVersementPret($this) {
       }
     });
     </script>
+<script >
+      var qte =  <?php echo json_encode($essencesqte)  ?>;
+      var prix =  <?php echo json_encode($essencesprix)  ?>;
+      var ttm =  <?php echo json_encode($ttprix)  ?>;
+      
+      console.log(ttm );
+    var xValues = ["janvier","fevrier","Mars","Avril","Mai","juin","Juillet","Aout","Septembre","Octobre","Novembre", "Decembre"];
+   
+   
+    new Chart("myChartEss", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{ 
+          data: qte,
+          borderColor: "blue",
+          backgroundColor:"blue",
+          label: "QTE ESSENCE",
+          fill: false
+        }, 
+        { 
+          data: prix,
+          borderColor: "red",
+          backgroundColor:"red",
+          label: "PRIX/L",
+          fill: true
+          
+        },
+         { 
+
+          data: ttm,
+          borderColor: "green",
+          backgroundColor:"green",
+          label: "Montant Total",
+          fill: false
+
+          
+        }]
+      },
+      options: {
+        legend: {display: true}
+      }
+    });
+
+
+    $(".anneegf").on('change',function(){
+    $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+        var _vm=$(this);
+        var _annee=$("#annee").val();
+        console.log(_annee);
+        var urlanne = "<?php echo url('/Annee-Graphe'); ?>";
+        $.ajax({
+          
+                url: urlanne,
+                type: "POST",
+                data:{
+                    'annee':_annee,
+                },
+                // dataType:'json',
+                success:  function(data){
+                location.reload(true);
+                        },
+
+            });
+  });
+
+    $(".rechvehicule").on('change',function(){
+    $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+        var _vm=$(this);
+        var _vehicule=$("#vehicule").val();
+        console.log(_vehicule);
+        var urlvehicule = "<?php echo url('/Vehicule-Graphe'); ?>";
+        $.ajax({
+          
+                url: urlvehicule,
+                type: "POST",
+                data:{
+                    'vehicule':_vehicule,
+                },
+                // dataType:'json',
+                success:  function(data){
+                location.reload(true);
+                        },
+
+            });
+  });
+
+    </script>
   

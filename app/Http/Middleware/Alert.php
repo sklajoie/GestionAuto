@@ -39,6 +39,12 @@ class Alert
         view()->share('versemencduc',$versemencduc );
         $reparationvehi=null;
         view()->share('reparationvehi',$reparationvehi );
+        $essencesqte=null;
+        view()->share('essencesqte',$essencesqte );
+        $essencesprix=null;
+        view()->share('essencesprix',$essencesprix );
+        $ttprix=null;
+        view()->share('ttprix',$ttprix );
 
         return $next($request);
     }

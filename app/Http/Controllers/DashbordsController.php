@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assurances;
 use App\Models\Conducteurs;
+use App\Models\Essences;
 use App\Models\Vehicules;
 use App\Models\Versements;
 use App\Models\Vidanges;
@@ -32,8 +33,41 @@ class DashbordsController extends Controller
                  $mois[]=($i+1);
              }
              
-             
+             if(Session::get('vehicule'))
+             {
+
              $versemencduc[]= Versements::where('supprimer',0)
+                         ->whereMonth("date", $mois[$i])
+                         ->whereYear('date', '=', $anne)
+                         ->where('Rubrique', '=', "VERSEMENTS CONDUCTEUR")
+                         ->where('vehicule_id', '=', Session::get('vehicule'))
+                         ->sum('Montant');
+
+             $reparationvehi[]= Versements::where('supprimer',0)
+                         ->whereMonth("date", $mois[$i])
+                         ->whereYear('date', '=', $anne)
+                         ->where('Rubrique', '=', "RÉPARATION VÉHICULE")
+                         ->where('vehicule_id', '=', Session::get('vehicule'))
+                         ->sum('Montant');
+
+
+                        $essencesqte[]= Essences::whereMonth("Date", $mois[$i])
+                                    ->whereYear('Date', '=', $anne)
+                                    ->where('vehicule_id', '=', Session::get('vehicule'))
+                                    ->sum('QTELitre');
+       
+                        $essencesprix[]= Essences::whereMonth("Date", $mois[$i])
+                                    ->whereYear('Date', '=', $anne)
+                                    ->where('vehicule_id', '=', Session::get('vehicule'))
+                                    ->sum('PrixLitre');
+       
+                        $ttprix[]= Essences::whereMonth("Date", $mois[$i])
+                                    ->whereYear('Date', '=', $anne)
+                                    ->where('vehicule_id', '=', Session::get('vehicule'))
+                                    ->sum('Montant');
+                    }else{
+
+                      $versemencduc[]= Versements::where('supprimer',0)
                          ->whereMonth("date", $mois[$i])
                          ->whereYear('date', '=', $anne)
                          ->where('Rubrique', '=', "VERSEMENTS CONDUCTEUR")
@@ -45,7 +79,22 @@ class DashbordsController extends Controller
                          ->where('Rubrique', '=', "RÉPARATION VÉHICULE")
                          ->sum('Montant');
 
+                 $essencesqte[]= Essences::whereMonth("Date", $mois[$i])
+                             ->whereYear('Date', '=', $anne)
+                             ->sum('QTELitre');
+
+                 $essencesprix[]= Essences::whereMonth("Date", $mois[$i])
+                             ->whereYear('Date', '=', $anne)
+                             ->sum('PrixLitre');
+
+                 $ttprix[]= Essences::whereMonth("Date", $mois[$i])
+                             ->whereYear('Date', '=', $anne)
+                             ->sum('Montant');
+                            }
+
+
                         }
+                        //dd($essencesprix, $essencesqte);
                         $vehicule= Vehicules::where('supprimer', 0)->where('Type', 'VOITURE')->count();
                         $motos= Vehicules::where('supprimer', 0)->where('Type', 'MOTO')->count();
                         $conducteur= Conducteurs::where('supprimer', 0)->count();
@@ -58,7 +107,9 @@ class DashbordsController extends Controller
             'versemencduc'=>$versemencduc,'reparationvehi'=>$reparationvehi,
             'vehicule'=>$vehicule,'motos'=>$motos,'assurances'=>$assurances,
             'visites'=>$visites,'vidanges'=>$vidanges,'conducteur'=>$conducteur,
+            'essencesqte'=>$essencesqte,'essencesprix'=>$essencesprix,'ttprix'=>$ttprix,
         ]);
+
     }
 
     /**
@@ -125,5 +176,28 @@ class DashbordsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function anneegraphe(Request $request)
+    {
+      if($request->annee != null){
+       $annee = $request->annee;
+      }
+      else{
+
+        $annee=date('Y');
+      }
+      Session::put('annee',  $annee);
+      return redirect()->back();
+      // return json_encode(1);
+    }
+    public function vehiculegraphe(Request $request)
+    {
+      if($request->vehicule != null){
+       $vehicule = $request->vehicule;
+      }
+      Session::put('vehicule',  $vehicule);
+      return redirect()->back();
+      // return json_encode(1);
     }
 }

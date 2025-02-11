@@ -72,7 +72,7 @@
         <!-- fix for small devices only -->
         <div class="clearfix hidden-md-up"></div>
 
-        <div class="col-12 col-sm-6 col-md-3">
+        {{-- <div class="col-12 col-sm-6 col-md-3">
           <div class="info-box mb-3">
             <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
@@ -83,7 +83,7 @@
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
-        </div>
+        </div> --}}
         <!-- /.col -->
         <div class="col-12 col-sm-6 col-md-3">
           <div class="info-box mb-3">
@@ -101,26 +101,84 @@
       </div>
       <!-- /.row -->
 
+      <div class="row col-12 col-md-12">
+        <div class="col-lg-3 col-md-4 col-6 table-responsive p-0">
+        <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{route('Annee-Graphe')}}">
+          {!! csrf_field() !!} 
+          <?php $years = range(2013, strftime("%Y", time())); ?>
+           
+              <select type="text" name="annee"  id="annee" class="form-control anneegf">
+              <option value="" > Année @if(Session::get('annee') !=null){{Session::get('annee')}}@else {{date('Y')}}@endif </option>
+          <?php foreach($years as $year) : ?>
+            <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+          <?php endforeach; ?>
+              </select>
+            </form>
+          </div>
+        <div class="col-lg-3 col-md-4 col-6 table-responsive p-0">
+        <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="/post-annee">
+          {!! csrf_field() !!} 
+          <select name="vehicule" class="form-control rechvehicule"  required id="vehicule">
+            <option value="0">Tout</option>
+            @foreach ( $voitures as $vehicule )
+            <option {{Session::get('vehicule') == $vehicule->id ? "selected" : "" }} value="{{$vehicule->id}}">{{$vehicule->Matriculation}} {{$vehicule->Marque}} {{$vehicule->Model}}</option>
+              
+            @endforeach
+          </select>
+            </form>
+          </div>
+        </div>
       <div class="row">
         <div class="col-md-12">
           <div class="card-body">
           <!-- STACKED BAR CHART -->
-          <div class="card card-info">
+          <div class="card card-primary">
             <div class="card-header">
-              {{-- <h3 class="card-title">Stacked Bar Chart</h3> --}}
-
-              <div class="card-tools">
+              <h3 class="card-title">GRAPHE DES MONTANTS DES VERSEMENTS CONDUCTEUR ET DES REPEPARATIONS</h3>
+             
+              {{-- <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-tool" data-card-widget="remove">
                   <i class="fas fa-times"></i>
                 </button>
-              </div>
+              </div> --}}
             </div>
             <div class="card-body">
               <div class="chart">
                 <canvas id="myChart" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 90%; background-color:white"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-body">
+          <!-- STACKED BAR CHART -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">GRAPHE DE LA GESTION D'ESSENCE</h3>
+
+              {{-- <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div> --}}
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="myChartEss" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 90%; background-color:white"></canvas>
               </div>
             </div>
             <!-- /.card-body -->
