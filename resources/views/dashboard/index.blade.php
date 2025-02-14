@@ -165,6 +165,38 @@
           <!-- STACKED BAR CHART -->
           <div class="card card-primary">
             <div class="card-header">
+              <h3 class="card-title">GRAPHE DE LA GESTION DES REPARATIONS ET ENTRETIENS</h3>
+
+              {{-- <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div> --}}
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="myChartpanne" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 90%; background-color:white"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-body">
+          <!-- STACKED BAR CHART -->
+          <div class="card card-primary">
+            <div class="card-header">
               <h3 class="card-title">GRAPHE DE LA GESTION D'ESSENCE</h3>
 
               {{-- <div class="card-tools">

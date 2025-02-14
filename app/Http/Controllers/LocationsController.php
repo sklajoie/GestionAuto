@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Locations;
+use App\Models\Versements;
 use Illuminate\Http\Request;
+use App\Models\VersementLocation;
+use App\Models\ConducteurLocation;
 use Illuminate\Support\Facades\Auth;
 
 class LocationsController extends Controller
@@ -47,6 +51,16 @@ class LocationsController extends Controller
            ]);
 
            
+            
+
+           $grandnumg=Locations::max('id');
+           $Newnumero = $grandnumg +1;
+                       if ((strlen((string)$Newnumero) == 1)) { $Newnumero = 'LV000'.$Newnumero ;}
+                       elseif ((strlen((string)$Newnumero) == 2)) { $Newnumero = 'LV00'.$Newnumero ;} 
+                       elseif ((strlen((string)$Newnumero) == 3)) { $Newnumero = 'LV0'.$Newnumero ;} 
+                       else{$Newnumero = 'ES'.$Newnumero ;}
+
+                       
            if($request->piece !=null){
             $imageTempName = $request->file('piece')->getPathname();
             $imageName = $request->file('piece')->getClientOriginalName();
@@ -72,6 +86,7 @@ class LocationsController extends Controller
                     'Piece'=> $newImageName,
                     'vehicule_id'=> $request->vehicule,
                     'user_id'=> Auth::user()->id,
+                    'Reference'=> $Newnumero,
            ]);
 
     return back()->with('success', "l'Enregistrement a été effectué avec success");
@@ -83,9 +98,16 @@ class LocationsController extends Controller
      * @param  \App\Models\Locations  $locations
      * @return \Illuminate\Http\Response
      */
-    public function show(Locations $locations)
+    public function show($id)
     {
-        //
+        $locations= Locations::where('id', $id)->first();
+        $chauffeurs= ConducteurLocation::where('location_id', $id)->get();
+        $versements= VersementLocation::where('location_id', $id)->get();
+       
+
+        return view('locations.details')->with([
+            'locations'=>$locations,'chauffeurs'=>$chauffeurs,'versements'=>$versements,
+        ]);
     }
 
     /**
@@ -156,4 +178,79 @@ class LocationsController extends Controller
     {
         //
     }
+
+    public function postConducteurlocation(Request $request)
+    {
+        $this->validate($request,[
+            'location' => 'required',
+            'date' => 'required',
+            'conducteur' => 'required',
+           ]);
+
+
+        ConducteurLocation::create([
+            'location_id'=> $request->location,
+             'Date'=> $request->date,
+             'conducteur_id'=> $request->conducteur,
+             'user_id'=> Auth::user()->id,
+    ]);
+    return back()->with('success', "l'Enregistrement a été modifié avec success");
+    }
+    public function postversementlocation(Request $request)
+    {
+        $this->validate($request,[
+            'montant' => 'required',
+            'date' => 'required',
+            'location' => 'required',
+           ]);
+
+           $currentYear = Carbon::now()->year;
+           $currentMonth = Carbon::now()->month;
+
+           $lastRef = VersementLocation::whereYear('created_at', $currentYear) 
+                                    ->whereMonth('created_at', $currentMonth) 
+                                    ->orderBy('id', 'desc')->first();
+
+            $maxId = $lastRef ? $lastRef->id: 0;
+            $maxId++; 
+            $referencevl = sprintf('%d-%02d-%04d', $currentYear, $currentMonth, $maxId);
+
+        VersementLocation::create([
+            'Reference'=> $referencevl,
+            'Montant'=> $request->montant,
+            'location_id'=> $request->location,
+             'Date'=> $request->date,
+             'MoyenPaiemet'=> $request->moyen,
+             'user_id'=> Auth::user()->id,
+    ]);
+            $locatn=Locations::where('id',$request->location)->first();
+           
+            $lastReference = Versements::whereYear('created_at', $currentYear) 
+                                ->whereMonth('created_at', $currentMonth) 
+                                ->orderBy('id', 'desc')->first();
+
+            $maxId = $lastReference ? $lastReference->id: 0;
+            $maxId++; 
+            $reference = sprintf('%d-%02d-%04d', $currentYear, $currentMonth, $maxId);
+
+            Versements::create([
+            'Montant'=> $request->montant,
+            'MoyenPaiemet'=> $request->moyen,
+            'Reference'=> $referencevl,
+            'Rubrique'=> 'VERSEMENT LOCATION',
+            'date'=> $request->date,
+            'Mouvement'=> 'ENTREE EN CAISSE',
+            'Type'=> 'autre',
+            'vehicule_id'=> $locatn->vehicule_id,
+            'Beneficier'=> $locatn->Client,
+            'codePaiement'=> $reference,
+            'user_id'=> Auth::user()->id,
+            ]);
+
+
+    return back()->with('success', "l'Enregistrement a été modifié avec success");
+    }
+
+
+
 }

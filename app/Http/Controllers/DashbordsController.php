@@ -50,40 +50,66 @@ class DashbordsController extends Controller
                          ->where('vehicule_id', '=', Session::get('vehicule'))
                          ->sum('Montant');
 
+             $vidangesgr[]= Versements::where('supprimer',0)
+                         ->whereMonth("date", $mois[$i])
+                         ->whereYear('date', '=', $anne)
+                         ->where('Rubrique', '=', "VIDANGE VEHICULE")
+                         ->where('vehicule_id', '=', Session::get('vehicule'))
+                         ->sum('Montant');
 
-                        $essencesqte[]= Essences::whereMonth("Date", $mois[$i])
-                                    ->whereYear('Date', '=', $anne)
-                                    ->where('vehicule_id', '=', Session::get('vehicule'))
-                                    ->sum('QTELitre');
-       
-                        $essencesprix[]= Essences::whereMonth("Date", $mois[$i])
-                                    ->whereYear('Date', '=', $anne)
-                                    ->where('vehicule_id', '=', Session::get('vehicule'))
-                                    ->sum('PrixLitre');
-       
-                        $ttprix[]= Essences::whereMonth("Date", $mois[$i])
-                                    ->whereYear('Date', '=', $anne)
-                                    ->where('vehicule_id', '=', Session::get('vehicule'))
-                                    ->sum('Montant');
+             $entretiens[]= Versements::where('supprimer',0)
+                         ->whereMonth("date", $mois[$i])
+                         ->whereYear('date', '=', $anne)
+                         ->where('Rubrique', '=', "ENTRETIENS VEHICULE")
+                         ->where('vehicule_id', '=', Session::get('vehicule'))
+                         ->sum('Montant');
+
+
+            $essencesqte[]= Essences::whereMonth("Date", $mois[$i])
+                        ->whereYear('Date', '=', $anne)
+                        ->where('vehicule_id', '=', Session::get('vehicule'))
+                        ->sum('QTELitre');
+
+            $essencesprix[]= Essences::whereMonth("Date", $mois[$i])
+                        ->whereYear('Date', '=', $anne)
+                        ->where('vehicule_id', '=', Session::get('vehicule'))
+                        ->sum('PrixLitre');
+
+            $ttprix[]= Essences::whereMonth("Date", $mois[$i])
+                        ->whereYear('Date', '=', $anne)
+                        ->where('vehicule_id', '=', Session::get('vehicule'))
+                        ->sum('Montant');
                     }else{
 
-                      $versemencduc[]= Versements::where('supprimer',0)
+                $versemencduc[]= Versements::where('supprimer',0)
                          ->whereMonth("date", $mois[$i])
                          ->whereYear('date', '=', $anne)
                          ->where('Rubrique', '=', "VERSEMENTS CONDUCTEUR")
                          ->sum('Montant');
 
-             $reparationvehi[]= Versements::where('supprimer',0)
-                         ->whereMonth("date", $mois[$i])
-                         ->whereYear('date', '=', $anne)
-                         ->where('Rubrique', '=', "RÉPARATION VÉHICULE")
-                         ->sum('Montant');
+                $reparationvehi[]= Versements::where('supprimer',0)
+                            ->whereMonth("date", $mois[$i])
+                            ->whereYear('date', '=', $anne)
+                            ->where('Rubrique', '=', "RÉPARATION VÉHICULE")
+                            ->sum('Montant');
 
-                 $essencesqte[]= Essences::whereMonth("Date", $mois[$i])
+                $entretiens[]= Versements::where('supprimer',0)
+                            ->whereMonth("date", $mois[$i])
+                            ->whereYear('date', '=', $anne)
+                            ->where('Rubrique', '=', "ENTRETIENS VEHICULE")
+                            ->sum('Montant');
+
+                $vidangesgr[]= Versements::where('supprimer',0)
+                            ->whereMonth("date", $mois[$i])
+                            ->whereYear('date', '=', $anne)
+                            ->where('Rubrique', '=', "VIDANGE VEHICULE")
+                            ->sum('Montant');
+
+                $essencesqte[]= Essences::whereMonth("Date", $mois[$i])
                              ->whereYear('Date', '=', $anne)
                              ->sum('QTELitre');
 
-                 $essencesprix[]= Essences::whereMonth("Date", $mois[$i])
+                $essencesprix[]= Essences::whereMonth("Date", $mois[$i])
                              ->whereYear('Date', '=', $anne)
                              ->sum('PrixLitre');
 
@@ -108,6 +134,7 @@ class DashbordsController extends Controller
             'vehicule'=>$vehicule,'motos'=>$motos,'assurances'=>$assurances,
             'visites'=>$visites,'vidanges'=>$vidanges,'conducteur'=>$conducteur,
             'essencesqte'=>$essencesqte,'essencesprix'=>$essencesprix,'ttprix'=>$ttprix,
+            'entretiens'=>$entretiens,'vidangesgr'=>$vidangesgr,
         ]);
 
     }

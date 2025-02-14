@@ -174,6 +174,7 @@ class ConducteursController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletVehicule=Conducteurs::findOrFail($id);
+        $deletVehicule->update(['supprimer'=> 1, 'Active'=>0 ]);
     }
 }

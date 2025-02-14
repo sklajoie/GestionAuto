@@ -45,6 +45,10 @@ class Alert
         view()->share('essencesprix',$essencesprix );
         $ttprix=null;
         view()->share('ttprix',$ttprix );
+        $entretiens=null;
+        view()->share('entretiens',$entretiens );
+        $vidangesgr=null;
+        view()->share('vidangesgr',$vidangesgr );
 
         return $next($request);
     }

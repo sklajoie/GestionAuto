@@ -78,13 +78,12 @@
                       <td >
                            <div class="d-flex btn btn-default btn-xs" >
                          
-                              <button type="button" class="btn btn-xs btn-primary" style="margin: 1px" data-toggle="modal" data-target="#edditModal{{$location->id}}">
+                              <button type="button" class="btn btn-xs btn-warning" style="margin: 1px" data-toggle="modal" data-target="#edditModal{{$location->id}}">
                               <i class="fa fa-edit"></i> Modifier
                                   </button>
-                          {{-- <a href="{{route('projets.show', $location->id)}}" style="margin: 1px" class="btn btn-sm btn-info "> <i class="fa fa-list"></i> </a>
-                       --}}
+                                  <a href="{{route('Locations.show',$location->id)}}" class="btn btn-info btn-xs"> <i  class="fa fa-list"></i> liste</a>
+                          
                       
-                     
                       </div>
   
                       </td>
@@ -151,6 +150,7 @@
                    <div class="" style="text-align: center;">
                       <br>
                  <button type="submit" class=" btn btn-warning">MODIFIER</button>
+                
                    </div>
           </form>
         </div>

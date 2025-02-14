@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('Status')->nullable();
             $table->text('Details')->nullable();
             $table->text('Piece')->nullable();
+            $table->string('Reference')->nullable();
             $table->unsignedBigInteger('vehicule_id')->nullable();
             $table->foreign('vehicule_id')->references('id')->on('vehicules')->onDelete('set null');
 

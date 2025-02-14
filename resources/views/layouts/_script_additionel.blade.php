@@ -12,7 +12,7 @@
        
       console.log(form_id);
         swal({
-                title: "Etre vous sur de supprimer?",
+                title: "Etre vous sur de supprimer cet enregistrement ?",
                 text: "La suppression d'un element est defitive",
                 icon: "warning",
                 buttons: true,
@@ -467,7 +467,6 @@ function mVersementPret($this) {
 
 <script >
       var versemencduc =  <?php echo json_encode($versemencduc)  ?>;
-      var reparationVehi =  <?php echo json_encode($reparationvehi)  ?>;
     var xValues = ["janvier","fevrier","Mars","Avril","Mai","juin","Juillet","Aout","Septembre","Octobre","Novembre", "Decembre"];
    
    
@@ -477,19 +476,60 @@ function mVersementPret($this) {
         labels: xValues,
         datasets: [{ 
           data: versemencduc,
-          borderColor: "blue",
-          backgroundColor:"blue",
-          label: "VERSEMENT CONDUCTEUR",
+          borderColor: "green",
+          backgroundColor:"green",
+          label: "VERSEMENT PAR VEHICULE",
           fill: false
         }, 
         // { 
-        //   data: [50,150,200,3500],
-        //   borderColor: "green",
-        //   backgroundColor:"green",
-        //   label: "Montant Total Encaissé",
+        //   data: entretienV,
+        //   borderColor: "orange",
+        //   backgroundColor:"orange",
+        //   label: "ENTRETIEN VEHICULE",
         //   fill: false
           
         // },
+        //  { 
+        //   data: reparationVehi,
+        //   borderColor: "red",
+        //   backgroundColor:"red",
+        //   label: "REPARATION VEHICULE",
+        //   fill: true
+        // }
+      ]
+      },
+      options: {
+        legend: {display: true}
+      }
+    });
+    </script>
+<script >
+      var vidange =  <?php echo json_encode($vidangesgr)  ?>;
+      var reparationVehi =  <?php echo json_encode($reparationvehi)  ?>;
+      var entretienV =  <?php echo json_encode($entretiens)  ?>;
+    var xValues = ["janvier","fevrier","Mars","Avril","Mai","juin","Juillet","Aout","Septembre","Octobre","Novembre", "Decembre"];
+   
+   
+    new Chart("myChartpanne", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [
+          { 
+          data:vidange ,
+          borderColor: "green",
+          backgroundColor:"green",
+          label: "VIDANGE VEHICULE",
+          fill: false
+        }, 
+        { 
+          data: entretienV,
+          borderColor: "orange",
+          backgroundColor:"orange",
+          label: "ENTRETIEN VEHICULE",
+          fill: false
+          
+        },
          { 
           data: reparationVehi,
           borderColor: "red",

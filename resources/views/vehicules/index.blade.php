@@ -82,11 +82,7 @@ if($vehicules){
                     <th>MODEL</th>
                     <th>STATUS</th>
                     {{-- <th>DATE ACQUISITION</th> --}}
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th style="text-align: center">ACTIONS</th>
                     <th></th>
                   </tr>
                   </thead>
@@ -101,38 +97,30 @@ if($vehicules){
                         <td>{{$vehicule->Model}}</td>
                         <td> {{$vehicule->Status}}</td>
                         {{-- <td> {{date('d-m-Y', strtotime($vehicule->DateAcquisition))}}</td> --}}
+                      
+                        
                         <td>
-                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".modifivehicule{{$vehicule->id}}"> <i class="fas fa-edit"></i> Modifier</button>
-                        </td>
-                        <td>
-                            <a href="{{route('Vehicules.show',$vehicule->id)}}" class="btn btn-info btn-xs"><i class="fas fa-list"></i>Détails</a>
-                        </td>
-                        <td>
-                            <a href="{{route('Assurances.show',$vehicule->id)}}" class="btn btn-info btn-app ">
+                          <div  style="display:flex; flex-direction:row; ">
+                            {{-- assurance --}}
+                            <a href="{{route('Assurances.show',$vehicule->id)}}" class="btn btn-info btn-app m-1">
                               @foreach ( $vehicule->assurance as $assurance )
                                @if(diffdateveh($assurance->DateFin) <= 50) <span class="badge bg-danger">Fin dans {{diffdateveh($assurance->DateFin)}} jour(s)</span> 
                                @else <span class="badge bg-success">Fin dans {{diffdateveh($assurance->DateFin)}} jour(s)</span>  
                                @endif
                                @endforeach
                                 <i class="fas fa-eye"></i> Assurance </a>
-                        </td>
-                        <td>
-                          <a href="{{route('Visites.show',$vehicule->id)}}" class="btn btn-info btn-app">
+                                {{-- visite --}}
+                          <a href="{{route('Visites.show',$vehicule->id)}}" class="btn btn-info btn-app m-1">
 
                             @foreach ( $vehicule->visite as $visite )
-                       
                             @if(diffdateveh($visite->DateFin) <= 30) <span class="badge bg-danger">Fin dans {{diffdateveh($visite->DateFin)}} jour(s)</span> 
                             @else <span class="badge bg-success">Fin dans {{diffdateveh($visite->DateFin)}} jour(s)</span>  
                             @endif
-
                            @endforeach
-
                             <i class="fas fa-eye"></i> Visite
-
                              </a>
-                      </td>
-                      <td> 
-                        <a href="{{route('Vidanges.show',$vehicule->id)}}" class="btn btn-info btn-app">
+                      {{-- vidange --}}
+                        <a href="{{route('Vidanges.show',$vehicule->id)}}" class="btn btn-info btn-app m-1">
                       @foreach ( $vehicule->vidanges as $vidange )
                        
                       @if(diffdateveh($vidange->DateFin) <= 30) <span class="badge bg-danger">Fin dans {{diffdateveh($vidange->DateFin)}} jour(s)</span> 
@@ -141,12 +129,27 @@ if($vehicules){
                            @endforeach
                            <i class="fas fa-eye"></i> Vidange 
                           </a>
-                        </td>
+                        {{-- versement --}}
+                            <a href="{{route('Versements.show',$vehicule->id)}}" class="btn btn-info btn-xs m-1"> <i class="fas fa-eye">Versement</i> </a>
+                          </div>
+                          </td>
+                          <td>
+                            <div  style="display:flex; flex-direction:row; ">
+                              <a href="{{route('Vehicules.show',$vehicule->id)}}" class="btn btn-info btn-xs m-1"><i class="fas fa-list"></i>Détails</a>
+                              <button type="button" class="btn btn-warning btn-xs m-1" data-toggle="modal" data-target=".modifivehicule{{$vehicule->id}}"> <i class="fas fa-edit"></i> Modifier</button>
+                            
+                    <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$vehicule->id}}">
+                        <i class="fa fa-trash"></i> Supprimer
+                    </a> 
+
+                    <form id="category-delete-{{$vehicule->id}}" action="{{route('Vehicules.destroy', $vehicule->id)}}" method="POST"> 
+                    @csrf 
+                    @method('DELETE') 
+
+                    </form>
+                            </div>
+                            </td>
                        
-                       
-                        <td>
-                            <a href="{{route('Versements.show',$vehicule->id)}}" class="btn btn-info btn-xs"> <i class="fas fa-eye">Versement</i> </a>
-                        </td>
                     </tr>
                     <div class="modal fade modifivehicule{{$vehicule->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">

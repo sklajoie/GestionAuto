@@ -69,7 +69,8 @@ Route::get('/Liste-Vehicules', [VehiculesController::class, 'getvehicule'])->nam
  Route::get('/Rapports-Rubriques', [RapportsController::class, 'getrapportsrubriques'])->name('Rapports-Rubriques');
  Route::get('/Rapports-Mouvements', [RapportsController::class, 'getrapportsmouvements'])->name('Rapports-Mouvements');
  
-//  Route::get('/Locations', [LocationsController::class, 'getrapportsmouvements'])->name('Locations');
+ Route::post('/Add-Conducteur-Location', [LocationsController::class, 'postConducteurlocation'])->name('Add-Conducteur-Location');
+ Route::post('/Add-versement-Location', [LocationsController::class, 'postversementlocation'])->name('Add-versement-Location');
 
 
 
