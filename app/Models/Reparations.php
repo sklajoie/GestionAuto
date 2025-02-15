@@ -9,7 +9,7 @@ class Reparations extends Model
 {
     protected $fillable = [
         'typePanne','DetailsPanne','DatePanne','CoutPanne','typeReparation','DetailsReparation','DateReparation','CoutReparation',
-        'Status','Active','conducteur_id','vehicule_id','user_id','Reference',
+        'Status','Active','conducteur_id','vehicule_id','user_id','Reference','supprimer',
 
   
       ];

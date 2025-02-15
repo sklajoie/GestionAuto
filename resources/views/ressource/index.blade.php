@@ -57,16 +57,21 @@
                       <td >{{$ressour->Autre}}</td>
                       <td>{{$ressour->Rubrique}}</td>
                       <td >
-                           <div class="d-flex btn btn-default btn-xs" >
+                        <div  style="display:flex; flex-direction:row; ">
                          
-                              <button type="button" class="btn btn-xs btn-primary" style="margin: 1px" data-toggle="modal" data-target="#edditModal{{$ressour->id}}">
+                              <button type="button" class="btn btn-xs btn-success" style="margin: 1px" data-toggle="modal" data-target="#edditModal{{$ressour->id}}">
                               <i class="fa fa-edit"></i> Modifier
                                   </button>
-                          {{-- <a href="{{route('projets.show', $ressour->id)}}" style="margin: 1px" class="btn btn-sm btn-info "> <i class="fa fa-list"></i> </a>
-                       --}}
-                      
+                                  <a href="javascript:;" class="btn btn-xs btn-danger  sa-delete m-1" title="Supprimer Rubrique" data-form-id="category-delete-{{$ressour->id}}">
+                                    <i class="fa fa-trash"></i> Supprimer
+                                </a>
+                            <form id="category-delete-{{$ressour->id}}" action="{{route('Ressources.destroy', $ressour->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+    
+                            </form>
                      
-                      </div>
+                         </div>
   
                       </td>
                       

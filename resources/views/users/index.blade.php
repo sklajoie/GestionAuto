@@ -82,27 +82,29 @@
                                 <td>{{$user->Fonction}}</td>
                                 <td style="text-align: center">
                                  
+                                  <div  style="display:flex; flex-direction:row; ">
                                     @if($user->Active =="1")
-                                    <a href="{{route('deactive-user', $user->id)}}" onclick="return confirm(`Êtes-vous sûr de vouloir desactiver cet utilisateur ?`);" title="Déactiver Utilisateur" class="btn btn-xs btn-success"> <i class="fa fa-toggle-on"></i> Active </a>
+                                    <a href="{{route('deactive-user', $user->id)}}" onclick="return confirm(`Êtes-vous sûr de vouloir desactiver cet utilisateur ?`);" title="Déactiver Utilisateur" class="btn btn-xs btn-success m-1"> <i class="fa fa-toggle-on"></i> Active </a>
                                     @else
-                                    <a href="{{route('active-user', $user->id)}}"  onclick="return confirm(`Êtes-vous sûr de vouloir activer cet utilisateur ?`);" title="activer Utilisateur" class="btn btn-xs btn-warning"> <i class="fa fa-toggle-off"></i> Désactivé </a>
+                                    <a href="{{route('active-user', $user->id)}}"  onclick="return confirm(`Êtes-vous sûr de vouloir activer cet utilisateur ?`);" title="activer Utilisateur" class="btn btn-xs btn-warning m-1"> <i class="fa fa-toggle-off"></i> Désactivé </a>
                                     @endif
                                    
-                                    <button type="button" class="btn btn-xs btn-primary " title="Modifier Utilisateur" data-toggle="modal" data-target="#editeModal{{$user->id}}">
+                                    <button type="button" class="btn btn-xs btn-primary m-1" title="Modifier Utilisateur" data-toggle="modal" data-target="#editeModal{{$user->id}}">
                                     <i class="fa fa-edit"></i> Modifier
                                       </button>
                                      
                                 
-                                <!--        <a href="javascript:;" class="btn btn-xs btn-danger  sa-delete" title="Supprimer Utilisateur" data-form-id="category-delete-{{$user->id}}">-->
-                                <!--            <i class="fa fa-trash"></i> Supprimer-->
-                                <!--        </a>-->
+                                       <a href="javascript:;" class="btn btn-xs btn-danger  sa-delete m-1" title="Supprimer Utilisateur" data-form-id="category-delete-{{$user->id}}">
+                                           <i class="fa fa-trash"></i> Supprimer
+                                       </a>
                                
         
-                                <!--<form id="category-delete-{{$user->id}}" action="{{route('Users.destroy', $user->id)}}" method="POST">-->
-                                <!--@csrf-->
-                                <!--@method('DELETE')-->
+                                <form id="category-delete-{{$user->id}}" action="{{route('Users.destroy', $user->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
         
-                                <!--</form>-->
+                                </form>
+                                  </div>
                                 </td>
                             </tr>
         
@@ -149,13 +151,7 @@
                             <input type="password" name="pass" id="pwd"  class="form-control toggle-password" placeholder="Password">
                             
                           </div>
-                         
-                          
-        
                         </div>
-        
-                                            <!-- /.card-body -->
-            
                             <div class="card-footer" style="text-align:center">
                                 <button type="submit" class="btn btn-primary">Modifier</button>
                             </div>

@@ -83,9 +83,19 @@
                         <td><a href="/images/visites/{{$visite->Attestation}}" target="_blanck "> <i class="fa fa-file" ></i> </a> </td>
                         <td> {{$visite->Status}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modifiassurance{{$visite->id}}"> <i class="fas fa-edit"></i></button>
-                            <a href="{{route('Assurances.show',$visite->id)}}" class="btn btn-info"> <i class="fas fa-list"></i> </a>
-                        </td>
+                          <div  style="display:flex; flex-direction:row; ">
+                            <button type="button" class="btn btn-success btn-xs m-1" data-toggle="modal" data-target=".modifiassurance{{$visite->id}}"> <i class="fas fa-edit"></i>Modifier</button>
+                            <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$visite->id}}">
+                              <i class="fa fa-trash"></i> Supprimer
+                          </a> 
+      
+                          <form id="category-delete-{{$visite->id}}" action="{{route('Visites.destroy', $visite->id)}}" method="POST"> 
+                          @csrf 
+                          @method('DELETE') 
+      
+                          </form>
+                          </div>
+                          </td>
                     </tr>
                     <div class="modal fade modifiassurance{{$visite->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">

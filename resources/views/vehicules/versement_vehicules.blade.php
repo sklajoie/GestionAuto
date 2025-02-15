@@ -90,7 +90,18 @@
 
                     </td>
                     <td>
-                      <a href="{{route('Versements.edit', $versement->id)}}" class="btn btn-info"> <i class="fa fa-list"></i></a>
+                      <div  style="display:flex; flex-direction:row; ">
+                      <a href="{{route('Versements.edit', $versement->id)}}" class="btn btn-success m-1"> <i class="fa fa-list"></i></a>
+                      <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$versement->id}}">
+                        <i class="fa fa-trash"></i> Supprimer
+                    </a> 
+
+                    <form id="category-delete-{{$versement->id}}" action="{{route('Versements.destroy', $versement->id)}}" method="POST"> 
+                    @csrf 
+                    @method('DELETE') 
+
+                    </form>
+                      </div>
                     </td>
                   </tr>
                   @endforeach

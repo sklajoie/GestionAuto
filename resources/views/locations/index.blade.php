@@ -76,13 +76,21 @@
                       <td>{{ date('d-m-Y à H:i', strtotime($location->DateFin ))}}</td>
                       <td>{{$location->Montant}}</td>
                       <td >
-                           <div class="d-flex btn btn-default btn-xs" >
+                        <div  style="display:flex; flex-direction:row; ">
                          
-                              <button type="button" class="btn btn-xs btn-warning" style="margin: 1px" data-toggle="modal" data-target="#edditModal{{$location->id}}">
-                              <i class="fa fa-edit"></i> Modifier
+                              <button type="button" class="btn btn-xs btn-warning m-1" style="margin: 1px" data-toggle="modal" data-target="#edditModal{{$location->id}}">
+                              <i class="fa fa-edit"></i> 
                                   </button>
-                                  <a href="{{route('Locations.show',$location->id)}}" class="btn btn-info btn-xs"> <i  class="fa fa-list"></i> liste</a>
-                          
+                                  <a href="{{route('Locations.show',$location->id)}}" class="btn btn-info btn-xs m-1"> <i  class="fa fa-list"></i> </a>
+                                  <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$location->id}}">
+                                    <i class="fa fa-trash"></i> 
+                                </a> 
+            
+                                <form id="category-delete-{{$location->id}}" action="{{route('Locations.destroy', $location->id)}}" method="POST"> 
+                                @csrf 
+                                @method('DELETE') 
+            
+                                </form>
                       
                       </div>
   

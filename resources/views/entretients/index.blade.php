@@ -58,7 +58,7 @@
                     <th >TYPE</th>
                     {{-- <th >MONTANT</th> --}}
                     <th >KILOMETRAGE</th>
-                    <th ></th>
+                    <th >ACTIONS</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -73,14 +73,20 @@
                       <td>{{$entretien->Type}}</td>
                       <td>{{$entretien->Kmg}}</td>
                       <td >
-                           <div class="d-flex btn btn-default btn-xs" >
+                        <div  style="display:flex; flex-direction:row; ">
                          
-                              <button type="button" class="btn btn-xs btn-primary" style="margin: 1px" data-toggle="modal" data-target="#edditModal{{$entretien->id}}">
+                              <button type="button" class="btn btn-xs btn-success m-1" style="margin: 1px" data-toggle="modal" data-target="#edditModal{{$entretien->id}}">
                               <i class="fa fa-edit"></i> Modifier
                                   </button>
-                          {{-- <a href="{{route('projets.show', $entretien->id)}}" style="margin: 1px" class="btn btn-sm btn-info "> <i class="fa fa-list"></i> </a>
-                       --}}
-                      
+                                  <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$entretien->id}}">
+                                    <i class="fa fa-trash"></i> Supprimer
+                                </a> 
+            
+                                <form id="category-delete-{{$entretien->id}}" action="{{route('Entretiens.destroy', $entretien->id)}}" method="POST"> 
+                                @csrf 
+                                @method('DELETE') 
+            
+                                </form>
                      
                       </div>
   

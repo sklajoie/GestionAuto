@@ -51,7 +51,7 @@
 
             <div class="card">
               <div class="card-header" style="text-align:center; !important">
-                <h3 class="card-title " >LISTE DES VEHICULES
+                <h3 class="card-title " >LISTE DES POLICE D'ASSURANCES
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">AJOUTER <i class="fas fa-plus"></i></button>
 
                 </h3>
@@ -83,9 +83,19 @@
                         <td> {{date('d-m-Y', strtotime($assurance->DateFin))}}</td>
                         <td> {{$assurance->Status}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modifiassurance{{$assurance->id}}"> <i class="fas fa-edit"></i></button>
-                            {{-- <a href="{{route('Assurances.show',$assurance->id)}}" class="btn btn-info"> <i class="fas fa-list"></i> </a> --}}
-                        </td>
+                          <div  style="display:flex; flex-direction:row; ">
+                            <button type="button" class="btn btn-success btn-xs m-1" data-toggle="modal" data-target=".modifiassurance{{$assurance->id}}"> <i class="fas fa-edit"></i> Modifier</button>
+                            <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$assurance->id}}">
+                              <i class="fa fa-trash"></i> Supprimer
+                          </a> 
+      
+                          <form id="category-delete-{{$assurance->id}}" action="{{route('Assurances.destroy', $assurance->id)}}" method="POST"> 
+                          @csrf 
+                          @method('DELETE') 
+      
+                          </form>
+                          </div>
+                          </td>
                     </tr>
                     <div class="modal fade modifiassurance{{$assurance->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">

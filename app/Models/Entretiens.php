@@ -9,7 +9,7 @@ class Entretiens extends Model
 {
     protected $fillable = [
         'Type','Montant','Description','Date','Garage','Kmg','Etat','Rappel',
-        'Status','conducteur_id','vehicule_id','user_id','Reference',
+        'Status','conducteur_id','vehicule_id','user_id','Reference','supprimer',
 
   
       ];

@@ -171,8 +171,11 @@ class EntretiensController extends Controller
      * @param  \App\Models\Entretiens  $entretiens
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Entretiens $entretiens)
+    public function destroy($id)
     {
-        //
+        $delet=Entretiens::findOrFail($id);
+        $delet->update(['supprimer'=> 1]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
     }
 }

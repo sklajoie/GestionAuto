@@ -136,7 +136,7 @@ if($vehicules){
                           <td>
                             <div  style="display:flex; flex-direction:row; ">
                               <a href="{{route('Vehicules.show',$vehicule->id)}}" class="btn btn-info btn-xs m-1"><i class="fas fa-list"></i>Détails</a>
-                              <button type="button" class="btn btn-warning btn-xs m-1" data-toggle="modal" data-target=".modifivehicule{{$vehicule->id}}"> <i class="fas fa-edit"></i> Modifier</button>
+                              <button type="button" class="btn btn-success btn-xs m-1" data-toggle="modal" data-target=".modifivehicule{{$vehicule->id}}"> <i class="fas fa-edit"></i> Modifier</button>
                             
                     <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$vehicule->id}}">
                         <i class="fa fa-trash"></i> Supprimer

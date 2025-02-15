@@ -201,7 +201,10 @@ class ReparationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delet=Reparations::findOrFail($id);
+        $delet->update(['supprimer'=> 1, 'Active'=>0 ]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
     }
 
     public function pannevehicule($id)

@@ -85,7 +85,19 @@
                         <td> {{$chauffeur->Status}}</td>
                         <td> {{date('d-m-Y', strtotime($chauffeur->created_at))}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".modificonducteur">MODIFIER <i class="fas fa-edit"></i></button>
+                          <div  style="display:flex; flex-direction:row; ">
+                            <button type="button" class="btn btn-success btn-xs m-1" data-toggle="modal" data-target=".modificonducteur">MODIFIER <i class="fas fa-edit"></i></button>
+
+                            <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$chauffeur->id}}">
+                              <i class="fa fa-trash"></i> Supprimer
+                          </a> 
+      
+                          <form id="category-delete-{{$chauffeur->id}}" action="{{route('Conducteurs.destroy', $chauffeur->id)}}" method="POST"> 
+                          @csrf 
+                          @method('DELETE') 
+      
+                          </form>
+                          </div>
                         </td>
                     </tr>
                     <div class="modal fade modificonducteur" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

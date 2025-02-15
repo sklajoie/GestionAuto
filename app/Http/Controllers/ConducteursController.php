@@ -176,5 +176,7 @@ class ConducteursController extends Controller
     {
         $deletVehicule=Conducteurs::findOrFail($id);
         $deletVehicule->update(['supprimer'=> 1, 'Active'=>0 ]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
     }
 }

@@ -19,7 +19,7 @@ class VersementsController extends Controller
      */
     public function index()
     {
-        $versements= Versements::all();
+        $versements= Versements::where('supprimer', 0)->get();
 
         return view('versements.index')->with([
             'versements'=>$versements,
@@ -205,8 +205,7 @@ class VersementsController extends Controller
                     'Type'=> $request->type_benef,
                     'conducteur_id'=> $employe,
                     'vehicule_id'=> $request->idvehicule,
-                    'user_id'=> 1
-                    // 'user_id'=> Auth::user()->id,
+                    'user_id'=> Auth::user()->id,
            ]);
 
     return back()->with('success', "l'Enregistrement a été modifié avec success");
@@ -220,7 +219,11 @@ class VersementsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delet=Versements::findOrFail($id);
+        $delet->update(['supprimer'=> 1]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
+
     }
     public function recherchetypemvmt($id)
     {

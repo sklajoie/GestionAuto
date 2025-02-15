@@ -81,9 +81,21 @@
                         <td> {{$panne->Status}}</td>
                         <td> {{date('d-m-Y', strtotime($panne->DatePanne))}}</td>
                         <td>
-                          <a href="{{route('Reparations.show',$panne->id)}}" class="btn btn-success btn-xs"> <i class="fa fa-list"></i> </a>
-                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".modifipanne{{$panne->id}}"> <i class="fas fa-edit"></i></button>
-                        </td>
+                          <div  style="display:flex; flex-direction:row; ">
+                          <a href="{{route('Reparations.show',$panne->id)}}" class="btn btn-success btn-xs m-1"> <i class="fa fa-list"></i> </a>
+                            <button type="button" class="btn btn-warning btn-xs m-1" data-toggle="modal" data-target=".modifipanne{{$panne->id}}"> <i class="fas fa-edit"></i></button>
+                        
+                            <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$panne->id}}">
+                              <i class="fa fa-trash"></i>
+                          </a> 
+      
+                          <form id="category-delete-{{$panne->id}}" action="{{route('Reparations.destroy', $panne->id)}}" method="POST"> 
+                          @csrf 
+                          @method('DELETE') 
+      
+                          </form>
+                          </div>
+                          </td>
                     </tr>
                     <div class="modal fade modifipanne{{$panne->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">

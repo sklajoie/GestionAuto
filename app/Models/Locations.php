@@ -9,7 +9,7 @@ class Locations extends Model
 {
     protected $fillable = [
         'Details','Client','Contact','Address','DateDebut','DateFin','Montant','KmDebut',
-        'Status','Etat','KmFin','vehicule_id','user_id','Piece','Reference',
+        'Status','Etat','KmFin','vehicule_id','user_id','Piece','Reference','supprimer',
 
   
       ];

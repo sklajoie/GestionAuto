@@ -101,7 +101,7 @@
       </div>
       <!-- /.row -->
 
-      <div class="row col-12 col-md-12">
+      <div class="#" style="display:flex; flex-direction:row; margin-left:50px">
         <div class="col-lg-3 col-md-4 col-6 table-responsive p-0">
         <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{route('Annee-Graphe')}}">
           {!! csrf_field() !!} 
@@ -115,7 +115,8 @@
               </select>
             </form>
           </div>
-        <div class="col-lg-3 col-md-4 col-6 table-responsive p-0">
+        
+        <div class="col-lg-4 col-md-4 col-6 table-responsive p-0" >
         <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="/post-annee">
           {!! csrf_field() !!} 
           <select name="vehicule" class="form-control rechvehicule"  required id="vehicule">
@@ -147,7 +148,7 @@
             </div>
             <div class="card-body">
               <div class="chart">
-                <canvas id="myChart" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 90%; background-color:white"></canvas>
+                <canvas id="myChart" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 100%; background-color:white"></canvas>
               </div>
             </div>
             <!-- /.card-body -->
@@ -178,7 +179,7 @@
             </div>
             <div class="card-body">
               <div class="chart">
-                <canvas id="myChartpanne" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 90%; background-color:white"></canvas>
+                <canvas id="myChartpanne" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 100%; background-color:white"></canvas>
               </div>
             </div>
             <!-- /.card-body -->
@@ -210,7 +211,7 @@
             </div>
             <div class="card-body">
               <div class="chart">
-                <canvas id="myChartEss" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 90%; background-color:white"></canvas>
+                <canvas id="myChartEss" style="min-height: 300px; height: 250px; max-height: 250px; max-width: 100%; background-color:white"></canvas>
               </div>
             </div>
             <!-- /.card-body -->

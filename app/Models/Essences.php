@@ -9,7 +9,7 @@ class Essences extends Model
 {
     protected $fillable = [
         'PrixLitre','Montant','QTELitre','KmgDebut','KmgFin','Date','Etat','Description',
-        'Status','conducteur_id','vehicule_id','user_id','Reference',
+        'Status','conducteur_id','vehicule_id','user_id','Reference','supprimer',
 
   
       ];

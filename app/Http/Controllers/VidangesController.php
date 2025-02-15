@@ -193,8 +193,12 @@ class VidangesController extends Controller
      * @param  \App\Models\Vidanges  $vidanges
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vidanges $vidanges)
+    public function destroy($id)
     {
-        //
+        $delet=Vidanges::findOrFail($id);
+        $delet->update(['supprimer'=> 1]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
+
     }
 }

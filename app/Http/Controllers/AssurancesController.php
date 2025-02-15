@@ -215,8 +215,11 @@ class AssurancesController extends Controller
      * @param  \App\Models\Assurances  $assurances
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Assurances $assurances)
+    public function destroy($id)
     {
-        //
+        $delet=Assurances::findOrFail($id);
+        $delet->update(['supprimer'=> 1]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
     }
 }

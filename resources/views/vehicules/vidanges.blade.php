@@ -87,8 +87,19 @@
                         <td>{{$vidange->conducteur->NomPrenom}}</td>
                         <td> {{$vidange->Status}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".modifiassurance{{$vidange->id}}"> <i class="fas fa-edit"></i></button>
-                            <a href="{{route('Assurances.show',$vidange->id)}}" class="btn btn-info btn-xs"> <i class="fas fa-list"></i> </a>
+                          <div  style="display:flex; flex-direction:row; ">
+                            <button type="button" class="btn btn-success btn-xs m-1" data-toggle="modal" data-target=".modifiassurance{{$vidange->id}}"> <i class="fas fa-edit"></i> Modifier</button>
+                           
+                            <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$vidange->id}}">
+                              <i class="fa fa-trash"></i> Supprimer
+                          </a> 
+      
+                          <form id="category-delete-{{$vidange->id}}" action="{{route('Vidanges.destroy', $vidange->id)}}" method="POST"> 
+                          @csrf 
+                          @method('DELETE') 
+      
+                          </form>  
+                          </div>
                         </td>
                     </tr>
                     <div class="modal fade modifiassurance{{$vidange->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

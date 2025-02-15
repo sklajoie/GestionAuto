@@ -209,8 +209,12 @@ class VisitesController extends Controller
      * @param  \App\Models\Visites  $visites
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Visites $visites)
+    public function destroy($id)
     {
-        //
+        $delet=Visites::findOrFail($id);
+        $delet->update(['supprimer'=> 1]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
+
     }
 }

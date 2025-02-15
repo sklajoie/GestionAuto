@@ -15,7 +15,7 @@ class RessourcesController extends Controller
      */
     public function index()
     {
-        $ressources= Ressources::all();
+        $ressources= Ressources::where('supprimer', 0)->get();
         return view('ressource.index')->with([
             'ressources'=>$ressources,
         ]);
@@ -108,8 +108,11 @@ class RessourcesController extends Controller
      * @param  \App\Models\Ressources  $ressources
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ressources $ressources)
+    public function destroy($id)
     {
-        //
+        $delet=Ressources::findOrFail($id);
+        $delet->update(['supprimer'=> 1]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
     }
 }

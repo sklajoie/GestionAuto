@@ -19,7 +19,7 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        $locations= Locations::All();
+        $locations= Locations::where('supprimer', 0)->get();
 
         return view('locations.index')->with([
             'locations'=>$locations,
@@ -174,9 +174,12 @@ class LocationsController extends Controller
      * @param  \App\Models\Locations  $locations
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Locations $locations)
+    public function destroy($id)
     {
-        //
+        $delet=Locations::findOrFail($id);
+        $delet->update(['supprimer'=> 1]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
     }
 
     public function postConducteurlocation(Request $request)

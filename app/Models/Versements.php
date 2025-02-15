@@ -9,7 +9,7 @@ class Versements extends Model
 {
     protected $fillable = [
         'Montant','MoyenPaiemet','Reference','Details','Status','conducteur_id','vehicule_id','user_id',
-        'Rubrique','pieceJointe','date','Beneficier','Type','Mouvement','codePaiement',
+        'Rubrique','pieceJointe','date','Beneficier','Type','Mouvement','codePaiement','supprimer',
 
   
       ];

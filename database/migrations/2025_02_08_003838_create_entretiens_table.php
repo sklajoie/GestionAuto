@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('Etat')->default(0);
             $table->string('Status')->nullable();
             $table->string('Rappel')->nullable();
+            $table->boolean('supprimer')->default(0);
 
             $table->unsignedBigInteger('conducteur_id')->nullable();
             $table->foreign('conducteur_id')->references('id')->on('conducteurs')->onDelete('set null');

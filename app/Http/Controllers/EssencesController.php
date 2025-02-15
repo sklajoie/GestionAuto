@@ -171,8 +171,11 @@ class EssencesController extends Controller
      * @param  \App\Models\Essences  $essences
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Essences $essences)
+    public function destroy($id)
     {
-        //
+        $delet=Essences::findOrFail($id);
+        $delet->update(['supprimer'=> 1]);
+
+        return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
     }
 }

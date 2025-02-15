@@ -144,20 +144,23 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delet=User::findOrFail($id);
+        $delet->update(['supprimer'=> 1,'Active'=> 0,]);
+
+        return redirect()->back()->with('success', "l'utilisateur a été Supprimé avec success");
     }
 
     public function activeuser($id)
     {
         $user=User::findOrFail($id);
-        $user->update([ 'actif'=> 1, ]);
+        $user->update([ 'Active'=> 1, ]);
         // flash("l'utilisateur a été activé avec success");
         return back()->with('success', "l'utilisateur a été activé avec success");
     }
     public function deactiveuser($id)
     {
         $user=User::findOrFail($id);
-        $user->update([ 'actif'=> 0,  ]);
+        $user->update([ 'Active'=> 0,  ]);
         // flash("l'utilisateur a été deactivé avec success");
         return back()->with('success', "l'utilisateur a été déactivé avec success");
     }
