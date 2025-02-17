@@ -55,7 +55,7 @@
               <li class="nav-item">
                 <a href="{{route('Liste-Vehicules')}}" class="nav-link {{ request()->routeIs('Liste-Vehicules*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Vehicule</p>
+                  <p>Vehicules</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -79,7 +79,7 @@
               <li class="nav-item">
                 <a href="{{route('Conducteurs.index')}}" class="nav-link {{ request()->routeIs('Conducteurs*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Conducteur</p>
+                  <p>Conducteurs</p>
                 </a>
               </li>
              
@@ -97,7 +97,7 @@
               <li class="nav-item">
                 <a href="{{route('Reparations.index')}}" class="nav-link {{ request()->routeIs('Reparations*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Reparation</p>
+                  <p>Reparations</p>
                 </a>
               </li>
              
@@ -133,7 +133,7 @@
               <li class="nav-item ">
                 <a href="{{route('Locations.index')}}" class="nav-link {{ request()->routeIs('Locations*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>LOCATION</p>
+                  <p>Locations</p>
                 </a>
               </li>
              
@@ -151,7 +151,7 @@
               <li class="nav-item ">
                 <a href="{{route('Essences.index')}}" class="nav-link {{ request()->routeIs('Essences*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>ESSENCE</p>
+                  <p>Essences</p>
                 </a>
               </li>
              
@@ -161,7 +161,7 @@
             <a href="#" class="nav-link {{ request()->routeIs('Entretiens*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                GESTION ENTRETIEN
+                GESTION ENTRETIENS
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -169,7 +169,61 @@
               <li class="nav-item ">
                 <a href="{{route('Entretiens.index')}}" class="nav-link {{ request()->routeIs('Entretiens*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>ENTRETIEN</p>
+                  <p>Entretiens</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item {{ request()->routeIs('Assurances*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('Assurances*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                LISTE ASSURANCE
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="{{route('Assurances.index')}}" class="nav-link {{ request()->routeIs('Assurances*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Assurances</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item {{ request()->routeIs('Visites*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('Visites*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                LISTE VISITE
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="{{route('Visites.index')}}" class="nav-link {{ request()->routeIs('Visites*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Visite</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item {{ request()->routeIs('Vidanges*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('Vidanges*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                LISTE VIDANGE
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="{{route('Vidanges.index')}}" class="nav-link {{ request()->routeIs('Vidanges*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Vidange</p>
                 </a>
               </li>
              
@@ -187,7 +241,7 @@
               <li class="nav-item ">
                 <a href="{{route('Users.index')}}" class="nav-link {{ request()->routeIs('Users*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>USERS</p>
+                  <p>Utilisateurs</p>
                 </a>
               </li>
              
@@ -205,7 +259,7 @@
               <li class="nav-item">
                 <a href="{{route('Ressources.index')}}" class="nav-link {{ request()->routeIs('Ressources*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>RUBRIQUE</p>
+                  <p>Rubriques</p>
                 </a>
               </li>
              
@@ -215,7 +269,7 @@
             <a href="#" class="nav-link {{ request()->routeIs('rapports*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                RAPPORT VEHICULE
+                RAPPORTS VEHICULES
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -223,7 +277,7 @@
               <li class="nav-item">
                 <a href="{{route('rapports')}}" class="nav-link {{ request()->routeIs('rapports*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>RAPPORT</p>
+                  <p>Rapports</p>
                 </a>
               </li>
              

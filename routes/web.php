@@ -56,9 +56,13 @@ Route::resource('/Essences', EssencesController::class);
 Route::post('/Annee-Graphe', [DashbordsController::class, 'anneegraphe'])->name('Annee-Graphe');
 Route::post('/Vehicule-Graphe', [DashbordsController::class, 'vehiculegraphe'])->name('Vehicule-Graphe');
 Route::get('/Liste-Vehicules', [VehiculesController::class, 'getvehicule'])->name('Liste-Vehicules');
- Route::get('/recherche-type-mvmt/{id}', [VersementsController::class, 'recherchetypemvmt'])->name('recherche-type-mvmt');
- Route::get('/Panne-Vehicule/{id}', [ReparationsController::class, 'pannevehicule'])->name('Panne-Vehicule');
+Route::get('/Panne-Vehicule/{id}', [ReparationsController::class, 'pannevehicule'])->name('Panne-Vehicule');
+Route::get('/recherche-type-mvmt/{id}', [VersementsController::class, 'recherchetypemvmt'])->name('recherche-type-mvmt');
  Route::get('/Versement-Vehicule/{id}', [VersementsController::class, 'versementvehicule'])->name('Versement-Vehicule');
+
+ Route::get('/active-conducteur/{id}', [ConducteursController::class, 'activeconducteur'])->name('active-conducteur');
+ Route::get('/deactive-conducteur/{id}', [ConducteursController::class, 'deactiveconducteur'])->name('deactive-conducteur');
+ 
  Route::get('/active-user/{id}', [UserController::class, 'activeuser'])->name('active-user');
  Route::get('/deactive-user/{id}', [UserController::class, 'deactiveuser'])->name('deactive-user');
 

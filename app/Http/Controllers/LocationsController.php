@@ -19,7 +19,7 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        $locations= Locations::where('supprimer', 0)->get();
+        $locations= Locations::where('supprimer', 0)->OrderBy('id','DESC')->get();
 
         return view('locations.index')->with([
             'locations'=>$locations,

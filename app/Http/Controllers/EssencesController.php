@@ -17,7 +17,7 @@ class EssencesController extends Controller
      */
     public function index()
     {
-        $essences = Essences::All();
+        $essences = Essences::where('supprimer', 0)->OrderBy('id','DESC')->get();
 
         return view('essences.index')->with([
             'essences'=>$essences,

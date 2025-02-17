@@ -19,7 +19,7 @@ class VersementsController extends Controller
      */
     public function index()
     {
-        $versements= Versements::where('supprimer', 0)->get();
+        $versements= Versements::where('supprimer', 0)->OrderBy('id','DESC')->get();
 
         return view('versements.index')->with([
             'versements'=>$versements,

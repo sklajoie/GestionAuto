@@ -81,7 +81,7 @@
             <div class="col-md-6">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">RAPPORT PAR EMPLOYER</h3>
+                  <h3 class="card-title">RAPPORT PAR EMPLOYE</h3>
     
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -93,7 +93,7 @@
                   <form action="{{route('Rapports-Employer')}}" target="blank"  method="GET">
                     {!! csrf_field() !!} 
                     <div class="form-group">
-                      <label for="inputStatus">EMPLOYER</label>
+                      <label for="inputStatus">EMPLOYE</label>
                       <select id="inputStatus" class="form-control custom-select" name="idmembre">
                         <option value="TOUT">Tout</option>
                         @foreach ($membres as $membre )
@@ -264,7 +264,7 @@
                   <form action="{{route('Rapports-Rubriques')}}" target="blank"  method="GET">
                     {!! csrf_field() !!} 
                     <div class="form-group">
-                      <label for="inputStatus">EMPLOYER</label>
+                      <label for="inputStatus">RUBRIQUE</label>
                       <select id="inputStatus" class="form-control custom-select" name="rubrique">
                         <option value="TOUT">Tout</option>
                         @foreach ($rubriques as $rubrique )

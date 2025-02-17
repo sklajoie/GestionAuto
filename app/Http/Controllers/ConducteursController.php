@@ -179,4 +179,21 @@ class ConducteursController extends Controller
 
         return redirect()->back()->with('success', "l'Enregistrement a été Supprimé avec success");
     }
+
+    public function activeconducteur($id)
+    {
+        $conduct=Conducteurs::findOrFail($id);
+        $conduct->update([ 'Active'=> 1]);
+        // flash("l'utilisateur a été activé avec success");
+        return back()->with('success', "le Conducteur a été activé avec success");
+    }
+    public function deactiveconducteur($id)
+    {
+        $conduct=Conducteurs::findOrFail($id);
+        $conduct->update([ 'Active'=> 0]);
+        // flash("l'conducteur a été deactivé avec success");
+        return back()->with('success', "le Conducteur a été déactivé avec success");
+    }
+
+
 }

@@ -19,7 +19,13 @@ class AssurancesController extends Controller
      */
     public function index()
     {
-        //
+        $assurances = Assurances::where('supprimer', 0)->OrderBy('id','DESC')->get();
+        $chauferVehicules= VehiculeConducteurs::where('Status', 'ASSIGNE')
+                                                ->OrderBy('id', 'DESC')
+                                                ->first();
+        return view('assurances.index')->with([
+            'assurances'=>$assurances,'chauferVehicules'=>$chauferVehicules,
+        ]);
     }
 
     /**
@@ -29,7 +35,7 @@ class AssurancesController extends Controller
      */
     public function create()
     {
-        //
+     
     }
 
     /**

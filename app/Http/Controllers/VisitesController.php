@@ -19,7 +19,13 @@ class VisitesController extends Controller
      */
     public function index()
     {
-        //
+        $visites = Visites::where('supprimer', 0)->OrderBy('id','DESC')->get();
+        $chauferVehicules= VehiculeConducteurs::where('Status', 'ASSIGNE')
+                                                ->OrderBy('id', 'DESC')
+                                                ->first();
+        return view('visites.index')->with([
+            'visites'=>$visites,'chauferVehicules'=>$chauferVehicules,
+        ]);
     }
 
     /**

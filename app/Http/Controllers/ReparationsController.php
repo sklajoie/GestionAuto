@@ -21,7 +21,7 @@ class ReparationsController extends Controller
      */
     public function index()
     {
-        $pannes=Reparations::WHERE('supprimer', 0)->get();
+        $pannes=Reparations::WHERE('supprimer', 0)->OrderBy('id','DESC')->get();
         $conducteurs=Conducteurs::WHERE('supprimer', 0)->get();
         $vehicules=Vehicules::WHERE('supprimer', 0)->get();
 

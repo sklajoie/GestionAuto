@@ -19,7 +19,13 @@ class VidangesController extends Controller
      */
     public function index()
     {
-        //
+        $vidanges = Vidanges::where('supprimer', 0)->OrderBy('id','DESC')->get();
+        $chauferVehicules= VehiculeConducteurs::where('Status', 'ASSIGNE')
+                                                ->OrderBy('id', 'DESC')
+                                                ->first();
+        return view('vidanges.index')->with([
+            'vidanges'=>$vidanges,'chauferVehicules'=>$chauferVehicules,
+        ]);
     }
 
     /**

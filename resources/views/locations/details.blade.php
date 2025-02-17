@@ -80,7 +80,6 @@
                     <b>DATE ACQUISITION</b> <a class="float-right">{{date('d-m-Y', strtotime($locations->vehicule->DateAcquisition))}}</a>
                   </li>
                 </ul>
-
                
               </div>
               <!-- /.card-body -->
@@ -124,7 +123,13 @@
                             <input type="text" value="{{$locations->Address}}" class="form-control" name="addressclient">
                        
                           <label class="control-label">PIECE JUSTIFICATIF (CNI/PERMIS...)</label>
-                            <input type="file"  class="form-control" name="piece">
+                          <input type="file"  class="form-control" name="piece">
+                          
+                          <label class="control-label"> PIECE JOINTE</label>
+                          <div class="">
+                            <a href="/images/locations/{{$locations->Piece}}" target="_blank"><i class="fa fa-file" style="width: 10px; height:10px"></i> Pièce jointe </a>
+
+                          </div>
                           </div>
                           <div class="col-sm-6">
                           <label class="control-label">DATE DEBUT</label>
@@ -142,9 +147,9 @@
                           <label class="control-label">KILOMETRAGE FIN</label>
                             <input type="number" value="{{$locations->KmFin}}" class="form-control" name="kmfin">
                           
+                            <label class="control-label">DETAILS</label>
+                             <textarea name="details" id="" class="form-control">{{$locations->Details}}</textarea>
                           </div>
-                          <label class="control-label">DETAILS</label>
-                           <textarea name="details" id="" class="form-control">{{$locations->Details}}</textarea>
                           </div>
                          <div class="" style="text-align: center;">
                             <br>

@@ -19,11 +19,12 @@ class Alert
      */
     public function handle(Request $request, Closure $next)
     {
-        $ressources = Ressources::all();
+        $ressources = Ressources::WHERE('supprimer', 0)->get();
         view()->share('ressources', $ressources );
         
         $membres = Conducteurs::SELECT('id','NomPrenom','Contact','Email','Address','Reference',)
                                 ->WHERE('supprimer', 0)
+                                ->WHERE('Active', 1)
                                 ->orderBy('NomPrenom')
                                 ->get();
         view()->share('membres',$membres );

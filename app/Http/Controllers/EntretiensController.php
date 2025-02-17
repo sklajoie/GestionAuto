@@ -17,7 +17,7 @@ class EntretiensController extends Controller
      */
     public function index()
     {
-        $entretiens= Entretiens::All();
+        $entretiens= Entretiens::where('supprimer', 0)->OrderBy('id','DESC')->get();
 
         return view('entretients.index')->with([
             'entretiens'=>$entretiens,

@@ -51,7 +51,7 @@
                     <th>Montant</th>
                     <th>Rubrique</th>
                     <th>Moyen</th>
-                    <th>Bénéficièr</th>
+                    <th>Bénéficiaire</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -75,7 +75,7 @@
                     </td>
                     <td>
                       <div  style="display:flex; flex-direction:row; ">
-                      <a href="{{route('Versements.edit', $versement->id)}}" class="btn btn-info btn-xs m-1"> <i class="fa fa-list"></i></a>
+                      <a href="{{route('Versements.edit', $versement->id)}}" class="btn btn-success btn-xs m-1"> <i class="fa fa-edit"></i></a>
                       <a href="javascript:;" class="btn btn-xs btn-danger sa-delete m-1" data-form-id="category-delete-{{$versement->id}}">
                         <i class="fa fa-trash"></i>
                     </a> 
@@ -132,7 +132,7 @@
                           <label for="checkin">Beneficiaire/Provenance</label>
                           <div class="Type_benefificiaire" id="Type_benefificiaire" >
                            {{-- <input type="text" id="beneficiare" name="beneficiare" required class="form-control"> --}}
-                                  <select class="form-control" name="beneficiare" id="beneficiare">
+                                  <select class="form-control select2" name="beneficiare" id="beneficiare">
                                   <option value="">Ajouter Beneficiaire/Provenance</option>
                                   
                                   </select>
@@ -143,7 +143,7 @@
                           <label for="checkin">Véhicule</label>
                           <div class="" id="" >
                            {{-- <input type="text" id="beneficiare" name="beneficiare" required class="form-control"> --}}
-                                  <select class="form-control" name="idvehicule" id="idvehicule">
+                                  <select class="form-control select2" name="idvehicule" id="idvehicule">
                                   <option value="">Véhicule</option>
                                   @foreach ( $voitures as $voiture )
                                   <option value="{{$voiture->id}}">{{$voiture->Matriculation}} {{$voiture->Marque}} ({{$voiture->Model}})</option>

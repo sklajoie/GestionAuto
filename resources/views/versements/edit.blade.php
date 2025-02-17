@@ -126,6 +126,12 @@
                               class="form-control">
                       </div>
                   </div>
+                  <div class="col-md-4">
+                      <label for="checkin">Pièce jointe</label>
+                      <div class="">
+                     <a href="/images/Decharge/{{$versements->pieceJointe}}" target="_blank"> <i class="fa fa-file"></i></a>
+                  </div>
+                  </div>
                   <div class="col-md-12">
                       <table style="width:100%;">
                           <tr>

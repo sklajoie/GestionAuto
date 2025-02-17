@@ -215,7 +215,7 @@
                     <option value="HORS SERVICE">HORS SERVICE</option>
                   </select>
                 <label class="control-label">VEHICULE</label>
-                  <select name="vehicule" class="form-control"  required id="">
+                  <select name="vehicule" class="form-control select2bs4"  required id="">
                     <option value="">CHOIX DU VEHICULE</option>
                     @foreach ( $vehicules as $vehicule )
                     <option value="{{$vehicule->id}}">{{$vehicule->Matriculation}} {{$vehicule->Marque}} {{$vehicule->Model}}</option>
@@ -223,7 +223,7 @@
                     @endforeach
                   </select>
                 <label class="control-label">CONDUCTEUR</label>
-                  <select name="conducteur" class="form-control"  required id="">
+                  <select name="conducteur" class="form-control select2"  required id="">
                     <option value="">CHOIX DU CONDUCTEUR</option>
                     @foreach ( $conducteurs as $conducteur )
                     <option value="{{$conducteur->id}}">{{$conducteur->NomPrenom}} ({{$conducteur->Contact}})</option>

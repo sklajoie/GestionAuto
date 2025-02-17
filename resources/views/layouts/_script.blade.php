@@ -41,9 +41,26 @@
 
 <!-- CodeMirror -->
 <script src="{{asset('assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!-- Select2 -->
+<script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 
 <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+  })
   $(function () {
+
+  
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+   
+
     $("#example1").DataTable({
       "responsive": false, "lengthChange": true, "autoWidth": true,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
@@ -58,6 +75,8 @@
       "responsive": true,
     });
   });
+
+  
 </script>
 
 <script>

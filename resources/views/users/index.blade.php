@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>UtILISATEUR</h1>
+            <h1>UTILISATEUR</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('Accueil')}}">ACCUEIL</a></li>
-              <li class="breadcrumb-item active">UtILISATEUR</li>
+              <li class="breadcrumb-item active">UTILISATEUR</li>
             </ol>
           </div>
         </div>

@@ -59,7 +59,7 @@
                     <th >DATE DEBUT</th>
                     <th >DATE FIN</th>
                     <th >MONTANT</th>
-                    <th ></th>
+                    <th >ACTIONS</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -72,8 +72,8 @@
                       <td >{{$location->vehicule->Marque}} ({{$location->vehicule->Matriculation}})</td>
                       <td>{{$location->Client}}</td>
                       <td>{{$location->Contact}}</td>
-                      <td>{{ date('d-m-Y à H:i', strtotime($location->DateDebut ))}}</td>
-                      <td>{{ date('d-m-Y à H:i', strtotime($location->DateFin ))}}</td>
+                      <td>{{ date('d-m-Y', strtotime($location->DateDebut ))}}</td>
+                      <td>{{ date('d-m-Y', strtotime($location->DateFin ))}}</td>
                       <td>{{$location->Montant}}</td>
                       <td >
                         <div  style="display:flex; flex-direction:row; ">
@@ -199,6 +199,7 @@
                         <div class="col-sm-6">
                           <label class="control-label">VEHICULE</label>
                           <select name="vehicule" class="form-control"  required id="">
+                            <option value="">Choix du véhicule</option>
                             @foreach ( $voitures as $vehicule )
                             <option value="{{$vehicule->id}}">{{$vehicule->Matriculation}} {{$vehicule->Marque}} {{$vehicule->Model}}</option>
                               
